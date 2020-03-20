@@ -3,7 +3,8 @@ import NavBar from './Components/NavBar/NavBar';
 import './App.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import LandingScreen from './Pages/LandingScreen/LandingScreen';
-import GeneralTopic from './Pages/general'
+// import GeneralTopic from './Pages/general'
+import SubForum from './Pages/SubForum/SubForum';
 
 //REDUX IMPORTS
 import { Provider } from 'react-redux';
@@ -68,7 +69,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
         <NavBar />
         <Router>
           <Route path="/" exact component={LandingScreen}/>
-          <Route path="/forum/general" exact component={GeneralTopic}/>
+          <Route path="/forum" component={SubForum}/>
 
         </Router>
       </ReactReduxFirebaseProvider>

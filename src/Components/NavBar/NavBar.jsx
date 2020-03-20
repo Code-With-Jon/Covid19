@@ -23,9 +23,7 @@ export default function NavBar() {
          <div>
             <img src="https://cdn.pixabay.com/photo/2017/09/11/03/18/virus-icon-2737712_960_720.png" height="50px" alt="Logo"/>
             <img src={Logo} />
-            <img src={DefaultAvatar} alt="avatar" />
-            <div></div>
-            <img src={avatar && avatar} alt="avatar" />
+            <img src={avatar ? avatar : DefaultAvatar} alt="avatar" />
             <button onClick={() => loginWithGoogle()}>Google Signin</button>
             <button onClick={() => handleSignOut()}>Google Signout</button>
          </div>
