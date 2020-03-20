@@ -25,6 +25,11 @@ const rrfConfig = {
    // presence: 'presence', // where list of online users is stored in database
    // sessions: 'sessions' // where list of user sessions is stored in database (presence must be enabled)
    // profileParamsToPopulate: [ 'conversations:conversations' ], //DOES NOT WORK FOR FIRESTORE
+   customAuthParameters: {
+      google: {
+         prompt: 'select_account',
+      }
+   }
 }
 
 //redux-firestore config

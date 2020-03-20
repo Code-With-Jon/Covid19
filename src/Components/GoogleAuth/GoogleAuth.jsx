@@ -1,15 +1,17 @@
 import React from 'react';
-import {useFirebase} from 'react-redux-firebase';
+import {useDispatch} from 'react-redux';
+import {signInGmail, signOut} from '../../redux/actions/authActions';
+
 
 export default function GoogleAuth() {
+   const dispatch = useDispatch();
 
-   const firebase = useFirebase();
    function loginWithGoogle() {
-      return firebase.login({ provider: 'google', type: 'popup', prompt: 'select_account' })
+      dispatch(signInGmail())
     }
 
     function handleSignOut() {
-       
+      dispatch(signOut())
     }
 
 
