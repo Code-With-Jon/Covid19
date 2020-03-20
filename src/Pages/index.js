@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 
+
 export default function Landing() {
   const [newsArticles, setNewsArticles] = useState([])
   useEffect(() => {
@@ -45,35 +46,36 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 
 return(
- <div>
- <NavBar />
- <Topics />
-<div style={{height: '100%', width: '100%'}}>
- <div>
- <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
- </div> 
- <div>
-  <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
-  </div>
-</div>
-<div>
-<YoutubeList />
-</div>
-{newsArticles && newsArticles.map((newsArticle, index) => {
+    <div>
+        <NavBar />
+  
+        <Topics />
+        <div style={{height: '100%', width: '100%'}}>
+            <div>
+                <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
+            </div> 
+            <div>
+                <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
+            </div>
+        </div>
+    <div>
+    <YoutubeList />
+        </div>
+        {newsArticles && newsArticles.map((newsArticle, index) => {
 
-return(
-<div key={index}>
-<img src={newsArticle.urlToImage} height='100px' width='100px' />
-<p>{newsArticle.author}</p>
-<p>{newsArticle.title}</p>
-<p>{newsArticle.description}</p>
-<p>{newsArticle.url}</p>
-<p>{newsArticle.publishedAt}</p>
-</div>
-)
-})
-}
+        return(
+            <div key={index}>
+            <img src={newsArticle.urlToImage} height='100px' width='100px' />
+            <p>{newsArticle.author}</p>
+            <p>{newsArticle.title}</p>
+            <p>{newsArticle.description}</p>
+            <p>{newsArticle.url}</p>
+            <p>{newsArticle.publishedAt}</p>
+            </div>
+            )
+        })
+    }
 
-</div>
-)
+    </div>
+    )
 }
