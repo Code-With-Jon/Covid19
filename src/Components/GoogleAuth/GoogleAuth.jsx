@@ -9,6 +9,11 @@ export default function GoogleAuth() {
    // To localize the provider's OAuth flow to the user's preferred language without explicitly passing the relevant custom OAuth parameters, update the language code on the Auth instance before starting the OAuth flow.
    // To apply the default browser preference instead of explicitly setting it.
    firebase.auth().useDeviceLanguage();
+
+   //Specify additional custom OAuth provider parameters that you want to send with the OAuth request. 
+   provider.setCustomParameters({
+      prompt: 'select_account',
+    });
    
    function googleSignin() {
       firebase.auth() 
