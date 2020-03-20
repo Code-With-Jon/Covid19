@@ -4,6 +4,7 @@ import './App.css';
 import IframeComponent from './Components/Map'
 import YoutubeList from './Components/YoutubeList';
 import { useEffect, useState } from 'react';
+import Topics from './Components/LandingScreen/Topics';
 
 
 
@@ -43,6 +44,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
   return (
     <div>
       <NavBar />
+      <Topics />
     <div style={{height: '100%', width: '100%'}}>
       <div>
       <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
@@ -55,8 +57,9 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 <YoutubeList />
 </div>
 {newsArticles && newsArticles.map((newsArticle, index) => {
+ 
   return(
-    <div>
+    <div key={index}>
 <img src={newsArticle.urlToImage} height='100px' width='100px' />
 <p>{newsArticle.author}</p>
 <p>{newsArticle.title}</p>

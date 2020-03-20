@@ -18,7 +18,7 @@ export default class YoutubeList extends React.Component {
         selectedVideo: null
       };
   
-      this.videoSearch('nbc');
+      this.videoSearch('us news');
     }
   
     videoSearch(term) {
