@@ -31,9 +31,4 @@ export default [
        route: 'forum/economy-outlook',
        description: 'Share your outlook'
    },
-   {
-       name: 'Misc',
-       route: 'forum/misc',
-       description: 'Misc Brah'
-   },
 ]
