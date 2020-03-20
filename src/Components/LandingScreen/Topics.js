@@ -1,17 +1,22 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 export default class Topics extends React.Component{
+
     handleClick = (index) => {
         console.log(index)
 
         switch (index) {
+           
             case 0:
-                console.log(index)
+                   return  <Link to="/general"> </Link>
                 break;
-        
+                
             default:
                 break;
+               
+
         }
     }
 
