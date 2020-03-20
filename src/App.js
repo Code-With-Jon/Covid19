@@ -6,8 +6,8 @@ import YoutubeList from './Components/YoutubeList';
 import { useEffect, useState } from 'react';
 import Topics from './Components/LandingScreen/Topics';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-
+import LandingScreen from './Pages/index'
+import GeneralTopic from './Pages/general'
 
 function App() {
   const [newsArticles, setNewsArticles] = useState([])
@@ -44,8 +44,8 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
   return (
     <Router>
-      <Route path="/Pages/index" />
-      <Route path="/Pages/general" />
+      <Route path="/" component={LandingScreen}/>
+      <Route path="/general" component={GeneralTopic}/>
 
     </Router>
   );

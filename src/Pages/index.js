@@ -1,10 +1,10 @@
 import React from 'react';
-import NavBar from './Components/NavBar/NavBar';
-import './App.css';
-import IframeComponent from './Components/Map'
-import YoutubeList from './Components/YoutubeList';
+import NavBar from '../Components/NavBar/NavBar';
+import '../App.css';
+import IframeComponent from '../Components/Map'
+import YoutubeList from '../Components/YoutubeList';
 import { useEffect, useState } from 'react';
-import Topics from './Components/LandingScreen/Topics';
+import Topics from '../Components/LandingScreen/Topics';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
@@ -44,7 +44,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 
 
-
+return(
  <div>
  <NavBar />
  <Topics />
@@ -75,5 +75,5 @@ return(
 }
 
 </div>
-
+)
 }

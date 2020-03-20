@@ -10,14 +10,14 @@ export default class Topics extends React.Component{
         switch (index) {
            
             case 0:
-                   return  <Link to="/general"> </Link>
+                return <Link to="/general"> </Link>
                 break;
                 
             default:
                 break;
-               
-
+                
         }
+        
     }
 
     render(){
