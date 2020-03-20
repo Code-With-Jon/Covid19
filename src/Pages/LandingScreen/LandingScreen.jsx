@@ -44,6 +44,24 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 return(
  <div>
+     <div id='news-articles' style={{display: 'flex', overflow: 'scroll', height: '20vh'}}>
+{newsArticles && newsArticles.map((newsArticle, index) => {
+
+        return(
+            <div key={index} >
+                <div id='news-article' style={{width: '20vw', padding: '2vw'}}>
+                <img src={newsArticle.urlToImage} height='100px' width='100px' />
+                <p>{newsArticle.author}</p>
+                <p>{newsArticle.title}</p>
+                <p>{newsArticle.description}</p>
+                <p>{newsArticle.url}</p>
+                <p>{newsArticle.publishedAt}</p>
+                </div>
+            </div>
+            )
+        })
+    }
+</div>
      <ScrollText />
    <Topics />
 <div style={{height: '100%', width: '100%'}}>
@@ -55,22 +73,9 @@ return(
   </div>
 </div>
 <div>
+
 <YoutubeList />
 </div>
-{newsArticles && newsArticles.map((newsArticle, index) => {
-
-        return(
-            <div key={index}>
-            <img src={newsArticle.urlToImage} height='100px' width='100px' />
-            <p>{newsArticle.author}</p>
-            <p>{newsArticle.title}</p>
-            <p>{newsArticle.description}</p>
-            <p>{newsArticle.url}</p>
-            <p>{newsArticle.publishedAt}</p>
-            </div>
-            )
-        })
-    }
 
     </div>
     )
