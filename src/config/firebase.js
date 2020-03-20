@@ -18,4 +18,19 @@ const firebaseConfig = {
  };
 
 firebase.initializeApp(firebaseConfig);
+
+const rrfConfig = {
+   userProfile: 'users', //collection name of where our user is stored.
+   useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB. now we can access our user document via state.firebase.profile
+   // presence: 'presence', // where list of online users is stored in database
+   // sessions: 'sessions' // where list of user sessions is stored in database (presence must be enabled)
+   // profileParamsToPopulate: [ 'conversations:conversations' ], //DOES NOT WORK FOR FIRESTORE
+}
+
+//redux-firestore config
+const rfConfig = {
+}
+
+export {rrfConfig, rfConfig}
+
 export default firebase;

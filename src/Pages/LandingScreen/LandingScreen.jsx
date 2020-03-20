@@ -1,11 +1,8 @@
 import React from 'react';
-import NavBar from '../Components/NavBar/NavBar';
-import '../App.css';
-import IframeComponent from '../Components/Map'
-import YoutubeList from '../Components/YoutubeList';
+import IframeComponent from '../../Components/Map'
+import YoutubeList from '../../Components/YoutubeList';
+import Topics from '../../Components/Topics/Topics';
 import { useEffect, useState } from 'react';
-import Topics from '../Components/LandingScreen/Topics';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 
@@ -46,6 +43,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 
 return(
+<<<<<<< HEAD:src/Pages/index.js
     <div>
         <NavBar />
   
@@ -62,6 +60,22 @@ return(
     <YoutubeList />
         </div>
         {newsArticles && newsArticles.map((newsArticle, index) => {
+=======
+ <div>
+   <Topics />
+<div style={{height: '100%', width: '100%'}}>
+ <div>
+ <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
+ </div> 
+ <div>
+  <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
+  </div>
+</div>
+<div>
+<YoutubeList />
+</div>
+{newsArticles && newsArticles.map((newsArticle, index) => {
+>>>>>>> 5a43ee42b0f661994b60d843d8961cf9cac6fb99:src/Pages/LandingScreen/LandingScreen.jsx
 
         return(
             <div key={index}>

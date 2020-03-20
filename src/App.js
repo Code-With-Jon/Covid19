@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import './App.css';
-import IframeComponent from './Components/Map'
-import YoutubeList from './Components/YoutubeList';
-import { useEffect, useState } from 'react';
-import Topics from './Components/LandingScreen/Topics';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import LandingScreen from './Pages/index'
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import LandingScreen from './Pages/LandingScreen/LandingScreen';
 import GeneralTopic from './Pages/general'
 
+//REDUX IMPORTS
+import { Provider } from 'react-redux';
+import { createFirestoreInstance } from 'redux-firestore';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+
+import firebase, { rrfConfig } from './config/firebase';
+import store from './redux/store';
+
+
+
 function App() {
+
+  //redux firebase props
+  const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance // <- needed if using firestore
+  }
+
+
   const [newsArticles, setNewsArticles] = useState([])
+
+
+
   useEffect(() => {
     getNews()
     },[])
@@ -43,11 +62,17 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 }
 
   return (
-    <Router>
-      <Route path="/" component={LandingScreen}/>
-      <Route path="/general" component={GeneralTopic}/>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider
+        {...rrfProps}>
+        <NavBar />
+        <Router>
+          <Route path="/" exact component={LandingScreen}/>
+          <Route path="/forum/general" exact component={GeneralTopic}/>
 
-    </Router>
+        </Router>
+      </ReactReduxFirebaseProvider>
+    </Provider>
   );
 }
 
