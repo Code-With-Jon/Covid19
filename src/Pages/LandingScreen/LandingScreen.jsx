@@ -3,6 +3,7 @@ import IframeComponent from '../../Components/Map'
 import YoutubeList from '../../Components/YoutubeList';
 import Topics from '../../Components/Topics/Topics';
 import { useEffect, useState } from 'react';
+import ScrollText from '../../Components/LandingScreen/ScrollText'
 
 
 
@@ -43,6 +44,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 return(
  <div>
+     <ScrollText />
    <Topics />
 <div style={{height: '100%', width: '100%'}}>
  <div>
@@ -57,19 +59,19 @@ return(
 </div>
 {newsArticles && newsArticles.map((newsArticle, index) => {
 
-return(
-<div key={index}>
-<img src={newsArticle.urlToImage} height='100px' width='100px' />
-<p>{newsArticle.author}</p>
-<p>{newsArticle.title}</p>
-<p>{newsArticle.description}</p>
-<p>{newsArticle.url}</p>
-<p>{newsArticle.publishedAt}</p>
-</div>
-)
-})
-}
+        return(
+            <div key={index}>
+            <img src={newsArticle.urlToImage} height='100px' width='100px' />
+            <p>{newsArticle.author}</p>
+            <p>{newsArticle.title}</p>
+            <p>{newsArticle.description}</p>
+            <p>{newsArticle.url}</p>
+            <p>{newsArticle.publishedAt}</p>
+            </div>
+            )
+        })
+    }
 
-</div>
-)
+    </div>
+    )
 }
