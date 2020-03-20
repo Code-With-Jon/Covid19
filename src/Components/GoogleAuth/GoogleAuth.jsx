@@ -8,6 +8,10 @@ export default function GoogleAuth() {
       return firebase.login({ provider: 'google', type: 'popup', prompt: 'select_account' })
     }
 
+    function handleSignOut() {
+       
+    }
+
 
    // var provider = new firebase.auth.GoogleAuthProvider();
    // // Specify additional OAuth 2.0 scopes that you want to request from the authentication provider. To add a scope, call addScope
@@ -51,8 +55,8 @@ export default function GoogleAuth() {
 
    return (
       <div>
-         <button onClick={() => googleSignin()}>Google Signin</button>
-         <button onClick={() => googleSignout()}>Google Signout</button>
+         <button onClick={() => loginWithGoogle()}>Google Signin</button>
+         <button onClick={() => handleSignOut()}>Google Signout</button>
       </div>
    )
 
