@@ -46,7 +46,7 @@ const topics = [
     },
     {
         name: 'Personal Loss',
-        description: 'If you have lost someone to Covid 19, find you support here'
+        description: 'If you have lost someone to Covid 19, find your support here'
     },
     {
         name: 'Job/Income Loss',
