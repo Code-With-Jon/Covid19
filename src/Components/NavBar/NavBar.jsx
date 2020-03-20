@@ -10,7 +10,7 @@ export default function NavBar() {
    return (
       <div>
          <div>
-            <img src={photoUrl} alt="avatar" />
+            <img src={null} alt="avatar" />
             <div></div>
          </div>
          <GoogleAuth />
