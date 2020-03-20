@@ -1,11 +1,8 @@
 import React from 'react';
-import NavBar from '../Components/NavBar/NavBar';
-import '../App.css';
-import IframeComponent from '../Components/Map'
-import YoutubeList from '../Components/YoutubeList';
+import IframeComponent from '../../Components/Map'
+import YoutubeList from '../../Components/YoutubeList';
+import Topics from '../../Components/Topics/Topics';
 import { useEffect, useState } from 'react';
-import Topics from '../Components/LandingScreen/Topics';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 
@@ -46,8 +43,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 
 return(
  <div>
- <NavBar />
- <Topics />
+   <Topics />
 <div style={{height: '100%', width: '100%'}}>
  <div>
  <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>

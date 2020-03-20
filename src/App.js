@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import './App.css';
-import IframeComponent from './Components/Map'
-import YoutubeList from './Components/YoutubeList';
-import Topics from './Components/LandingScreen/Topics';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import LandingScreen from './Pages/index'
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import LandingScreen from './Pages/LandingScreen/LandingScreen';
 import GeneralTopic from './Pages/general'
 
 //REDUX IMPORTS
@@ -68,9 +65,10 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
     <Provider store={store}>
       <ReactReduxFirebaseProvider
         {...rrfProps}>
+        <NavBar />
         <Router>
-          <Route path="/" component={LandingScreen}/>
-          <Route path="/general" component={GeneralTopic}/>
+          <Route path="/" exact component={LandingScreen}/>
+          <Route path="/forum/general" exact component={GeneralTopic}/>
 
         </Router>
       </ReactReduxFirebaseProvider>
