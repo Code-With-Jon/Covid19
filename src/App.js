@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import LandingScreen from './Pages/LandingScreen/LandingScreen';
 import GeneralTopic from './Pages/general'
-
+import Footer from './Components/Footer/FooterComponent'
 //REDUX IMPORTS
 import { Provider } from 'react-redux';
 import { createFirestoreInstance } from 'redux-firestore';
@@ -71,6 +71,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
           <Route path="/forum/general" exact component={GeneralTopic}/>
 
         </Router>
+        <Footer />
       </ReactReduxFirebaseProvider>
     </Provider>
   );
