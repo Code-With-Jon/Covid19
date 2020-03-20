@@ -1,7 +1,14 @@
 import React from 'react';
-import firebase from '../../config/firebase';
+import {useFirebase} from 'react-redux-firebase';
 
 export default function GoogleAuth() {
+
+   const firebase = useFirebase();
+   function loginWithGoogle() {
+      return firebase.login({ provider: 'google', type: 'popup' })
+    }
+
+
    var provider = new firebase.auth.GoogleAuthProvider();
    // Specify additional OAuth 2.0 scopes that you want to request from the authentication provider. To add a scope, call addScope
    // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');

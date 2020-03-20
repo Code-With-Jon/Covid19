@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import './App.css';
 import IframeComponent from './Components/Map'
 import YoutubeList from './Components/YoutubeList';
-import { useEffect, useState } from 'react';
+
+//REDUX IMPORTS
+import { Provider } from 'react-redux';
+import { createFirestoreInstance } from 'redux-firestore';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+
+import firebase, { rrfConfig } from './config/firebase';
+import store from './redux/store';
 
 
 
 function App() {
+
+  //redux firebase props
+  const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance // <- needed if using firestore
+  }
+
+
   const [newsArticles, setNewsArticles] = useState([])
+
+
+
   useEffect(() => {
     getNews()
     },[])
@@ -41,7 +61,9 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 }
 
   return (
-    <div>
+    <Provider store={store}>
+      <ReactReduxFirebaseProvider
+        {...rrfProps}>
       <NavBar />
     <div style={{height: '100%', width: '100%'}}>
       <div>
@@ -56,7 +78,7 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 </div>
 {newsArticles && newsArticles.map((newsArticle, index) => {
   return(
-    <div>
+    <div key={index}>
 <img src={newsArticle.urlToImage} height='100px' width='100px' />
 <p>{newsArticle.author}</p>
 <p>{newsArticle.title}</p>
@@ -68,7 +90,8 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 })
 }
 
-</div>
+      </ReactReduxFirebaseProvider>
+    </Provider>
   );
 }
 
