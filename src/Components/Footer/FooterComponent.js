@@ -42,11 +42,11 @@ render(){
                 url: 'https://www.worldometers.info/coronavirus/',
                 openExternal: true,
               },
-              // {
-              //   title: 'Kitchen',
-              //   url: 'https://kitchen.alipay.com/',
-              //   description: 'Sketch 工具集',
-              // },
+              {
+                title: 'Trackcorona',
+                url: 'https://www.trackcorona.live/',
+                openExternal: true,
+              },
             ],
           },
           {
