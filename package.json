@@ -7,10 +7,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "covid19-api": "^1.0.4",
+    "draft-js": "^0.11.4",
+    "draftjs-to-html": "^0.9.1",
     "firebase": "^7.12.0",
     "rc-footer": "^0.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-draft-wysiwyg": "^1.14.4",
     "react-iframe": "^1.8.0",
     "react-images-upload": "^1.2.8",
     "react-redux": "^7.2.0",
@@ -22,7 +25,6 @@
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0",
-    "suneditor-react": "^2.7.2",
     "youtube-api-search": "0.0.5"
   },
   "scripts": {

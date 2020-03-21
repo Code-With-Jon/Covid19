@@ -2,32 +2,46 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addPost} from '../../redux/actions/postActions';
 import ImageUploader from "react-images-upload";
-import SunEditor, {buttonList} from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css'; 
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 
 export default function CreatePost(props) {
    const dispatch = useDispatch();
 
-   const [content, setContent] = useState('');
-   const [pictures, setPictures] = useState([]);
+   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+   // const [pictures, setPictures] = useState([]);
 
-   const onDrop = picture => {
-     setPictures(picture);
-   };
+   //testing states
+   const [htmlString, setHtmlString] = useState('');
+   const [editing, setEditing] = useState(true);
+   const [postId, setPostId] = useState('');
 
-   function createPost() {
-      console.log(content);
+   // const onDrop = picture => {
+   //   setPictures(picture);
+   // };
+
+   async function createPost() {
+      setEditing(!editing);
+      const docId = await dispatch(addPost(convertToRaw(editorState.getCurrentContent())))
+      setPostId(docId);
+      setHtmlString(draftToHtml(convertToRaw(editorState.getCurrentContent())))
    }
    
-   function handleTextChange(content) {
-      setContent(content);
+   function handleEditorStateChange(EditorStateObject) {
+      setEditorState(EditorStateObject);
    }
 
+   // function onContentStateChange(RawDraftContentStateObject) {
+   //    // console.log(convertFromRaw(RawDraftContentStateObject))
+   //    setRawDraftContent(RawDraftContentStateObject);
+   // }
 
    return (
       <div>
-         <button onClick={() => createPost()}>Console log</button>
-         young money
+         <button onClick={() => createPost()}>Save/Edit</button>
          {/* <ImageUploader
             withPreview={true}
             buttonText="Upload Image"
@@ -36,18 +50,24 @@ export default function CreatePost(props) {
             imgExtension={[".jpg", ".gif", ".png", ".gif"]}
             maxFileSize={5242880}
          /> */}
-         <SunEditor 
-            placeholder="Please type here..."
-            width="80%"
-            lang="en"
-            enable={true}
-            onChange={handleTextChange}
-            enableToolbar={true}
-            setOptions={{
-               height: 500,
-               buttonList: buttonList.complex,
-            }}
+         {editing ? 
+         <Editor
+            placeholder="Type your Post!"
+            editorState={editorState}
+            // initialContentState={rawDraftContent}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={handleEditorStateChange}
          />
+         :
+         <>
+         <p>{postId}</p>
+         <div dangerouslySetInnerHTML={{__html: htmlString}} style={{border: '1px solid black'}}>
+         </div>
+         </>
+         }
+
       </div>
    )
 }
