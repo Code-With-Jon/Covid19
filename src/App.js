@@ -31,8 +31,8 @@ function App() {
     <Provider store={store}>
       <ReactReduxFirebaseProvider
         {...rrfProps}>
-        <NavBar />
         <Router>
+          <NavBar />
           <Route path="/" exact component={LandingScreen}/>
           <Route path="/forum/:topic" exact component={SubForum}/>
           <Route path="/forum/:topic/create" exact component={CreatePost}/>
