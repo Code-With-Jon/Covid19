@@ -6,7 +6,7 @@ import LandingScreen from './Pages/LandingScreen/LandingScreen';
 // import GeneralTopic from './Pages/general'
 import SubForum from './Pages/SubForum/SubForum';
 import CreatePost from './Pages/CreatePost/CreatePost';
-
+import Footer from './Components/Footer/FooterComponent'
 //REDUX IMPORTS
 import { Provider } from 'react-redux';
 import { createFirestoreInstance } from 'redux-firestore';
@@ -38,6 +38,7 @@ function App() {
           <Route path="/forum/:topic/create" exact component={CreatePost}/>
 
         </Router>
+        <Footer />
       </ReactReduxFirebaseProvider>
     </Provider>
   );

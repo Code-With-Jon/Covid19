@@ -64,3 +64,7 @@
 .list-group-item:hover {
   background-color: #eee;
 }
+
+#news-article:hover {
+  background-color: #61dafb;
+}
