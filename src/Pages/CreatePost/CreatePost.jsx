@@ -2,11 +2,17 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addPost} from '../../redux/actions/postActions';
 import ImageUploader from "react-images-upload";
+<<<<<<< HEAD
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+=======
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css'; 
+import buttonList from './buttonList'
+>>>>>>> 4d4c8a3c805ba3d51980ef126af0e90293cc2e47
 
 export default function CreatePost(props) {
    const dispatch = useDispatch();

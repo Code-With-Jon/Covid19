@@ -33,10 +33,11 @@ export default function NavBar(props) {
             
                     
                         <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
-                  
+                        {!avatar ? 
                         <button onClick={() => loginWithGoogle()}>Google Signin</button>
+                        :
                         <button onClick={() => handleSignOut()}>Google Signout</button>
-               
+                        }
             </div>
          </div>
       </div>
