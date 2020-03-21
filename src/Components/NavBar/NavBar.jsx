@@ -29,12 +29,14 @@ export default function NavBar(props) {
                <img src={Logo} style={{height: '20vh', marginTop: '-2vh'}}/>
             </div>
             </Link>
-            <div style={{width: '83vw', textAlign: 'end'}}>
-               <div style={{}}>
-               <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="100px" style={{borderRadius: 50}}/>
-               </div>
-               <button onClick={() => loginWithGoogle()}>Google Signin</button>
-               <button onClick={() => handleSignOut()}>Google Signout</button>
+            <div style={{width: '83vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+            
+                    
+                        <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
+                  
+                        <button onClick={() => loginWithGoogle()}>Google Signin</button>
+                        <button onClick={() => handleSignOut()}>Google Signout</button>
+               
             </div>
          </div>
       </div>
