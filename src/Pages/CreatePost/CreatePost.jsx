@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addPost} from '../../redux/actions/postActions';
-import ImageUploader from "react-images-upload";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
@@ -25,19 +24,21 @@ export default function CreatePost(props) {
 
    async function createPost() {
       setEditing(!editing);
-      const docId = await dispatch(addPost(convertToRaw(editorState.getCurrentContent())))
-      setPostId(docId);
-      setHtmlString(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+      var docId = '';
+      try {
+         docId = await dispatch(addPost(convertToRaw(editorState.getCurrentContent())))
+         setPostId(docId);
+         setHtmlString(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+      }
+      catch(err) {
+         setPostId("Error!")
+      }
    }
    
    function handleEditorStateChange(EditorStateObject) {
       setEditorState(EditorStateObject);
    }
 
-   // function onContentStateChange(RawDraftContentStateObject) {
-   //    // console.log(convertFromRaw(RawDraftContentStateObject))
-   //    setRawDraftContent(RawDraftContentStateObject);
-   // }
 
    return (
       <div>

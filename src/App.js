@@ -28,41 +28,6 @@ function App() {
   }
 
 
-  const [newsArticles, setNewsArticles] = useState([])
-
-
-
-  useEffect(() => {
-    getNews()
-    },[])
-
- const getNews = async () => {
-
-var url = 'http://newsapi.org/v2/top-headlines?' +
-          'q=corona&' +
-          'from=2020-03-20&' +
-          'sortBy=popularity&' +
-          'country=us&' +
-          'apiKey=b3db4dbc41ff429ca7d575d12e817330';
-          var req = new Request(url);
-        const res = await fetch(req)
-         const json = await res.json()
-         console.log(json.articles)
-        setNewsArticles(json.articles)
-       
-  }
-
- const convertUTCDateToLocalDate = (date) => {
-    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
-
-    var offset = date.getTimezoneOffset() / 60;
-    var hours = date.getHours();
-
-    newDate.setHours(hours - offset);
-
-    return newDate;   
-}
-
   return (
     <Provider store={store}>
       <ReactReduxFirebaseProvider
@@ -70,7 +35,8 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
         <Router>
         <NavBar />
           <Route path="/" exact component={LandingScreen}/>
-          <Route path="/forum/general" exact component={GeneralTopic}/>
+          <Route path="/forum/:id" exact component={SubForum}/>
+          <Route path="/forum/:id/create" exact component={CreatePost}/>
 
         </Router>
         <Footer />
