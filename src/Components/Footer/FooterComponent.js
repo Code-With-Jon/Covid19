@@ -49,26 +49,26 @@ render(){
               // },
             ],
           },
-          // {
-          //   title: '帮助',
-          //   items: [
-          //     {
-          //       title: 'Ant Design Pro',
-          //       url: 'https://pro.ant.design/',
-          //       openExternal: true,
-          //     },
-          //     {
-          //       title: 'Ant Design Mobile',
-          //       url: 'https://mobile.ant.design/',
-          //       openExternal: true,
-          //     },
-          //     {
-          //       title: 'Kitchen',
-          //       url: 'https://kitchen.alipay.com/',
-          //       description: 'Sketch 工具集',
-          //     },
-          //   ],
-          // },
+          {
+            title: "VOLUNTEER",
+            items: [
+              {
+                title: 'LIST OF WAYS TO VOLUNTEER',
+                url: 'https://www.foxnews.com/health/how-to-volunteer-during-coronavirus',
+                openExternal: true,
+              },
+              // {
+              //   title: 'Ant Design Mobile',
+              //   url: 'https://mobile.ant.design/',
+              //   openExternal: true,
+              // },
+              // {
+              //   title: 'Kitchen',
+              //   url: 'https://kitchen.alipay.com/',
+              //   description: 'Sketch 工具集',
+              // },
+            ],
+          },
           {
             icon: (
               <img
