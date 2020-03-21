@@ -10,7 +10,7 @@ render(){
       <Footer
         columns={[
           {
-            title: 'Helpful Links',
+            title: 'HELPFUL LINKS',
             items: [
               {
                 title: 'WHO',
