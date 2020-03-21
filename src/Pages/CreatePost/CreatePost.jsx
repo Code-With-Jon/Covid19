@@ -66,7 +66,7 @@ export default function CreatePost(props) {
                   // className: undefined,
                   // component: undefined,
                   // popupClassName: undefined,
-                  urlEnabled: false,
+                  urlEnabled: true,
                   uploadEnabled: true,
                   alignmentEnabled: true,
                   uploadCallback: true,
