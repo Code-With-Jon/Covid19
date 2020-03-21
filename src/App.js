@@ -65,8 +65,9 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
     <Provider store={store}>
       <ReactReduxFirebaseProvider
         {...rrfProps}>
-        <NavBar />
+        
         <Router>
+        <NavBar />
           <Route path="/" exact component={LandingScreen}/>
           <Route path="/forum/general" exact component={GeneralTopic}/>
 
