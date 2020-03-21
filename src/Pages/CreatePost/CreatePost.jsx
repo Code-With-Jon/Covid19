@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addPost} from '../../redux/actions/postActions';
 import ImageUploader from "react-images-upload";
-import SunEditor, {buttonList} from 'suneditor-react';
+import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; 
+import buttonList from './buttonList'
 
 export default function CreatePost(props) {
    const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function CreatePost(props) {
             placeholder="Please type here..."
             width="80%"
             lang="en"
-            enable={true}
+            // enable={true}
             onChange={handleTextChange}
             enableToolbar={true}
             setOptions={{
