@@ -22,6 +22,7 @@
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
     "redux-thunk": "^2.3.0",
+    "suneditor-react": "^2.7.2",
     "youtube-api-search": "0.0.5"
   },
   "scripts": {
