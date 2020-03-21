@@ -23,12 +23,20 @@ export default function CreatePost(props) {
    // };
 
    async function createPost() {
-      setEditing(!editing);
+      if (!editing) {
+         return;
+      }
+      setEditing(false);
       var docId = '';
+      const data = {
+         topic: props.match.params.topic,
+         contentJSON: convertToRaw(editorState.getCurrentContent())
+      }
       try {
-         docId = await dispatch(addPost(convertToRaw(editorState.getCurrentContent())))
-         setPostId(docId);
-         setHtmlString(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+         docId = await dispatch(addPost(data))
+         props.history.push(`/forum/${props.match.params.topic}/${docId}`)
+         // setPostId(docId);
+         // setHtmlString(draftToHtml(data.contentJSON))
       }
       catch(err) {
          setPostId("Error!")

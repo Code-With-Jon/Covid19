@@ -7,13 +7,13 @@ export default [
        description: 'Share your stories dealing with Covid 19 lockdowns, family, ect.'
    },
    {
-       name: 'Pre-Diagnoses',
-       route: '/forum/pre-diagnoses',
+       name: 'Pre-Diagnosis',
+       route: '/forum/pre-diagnosis',
        description: 'Talk about symptoms, processes, and other relavent topics'
    },
    {
-       name: 'Post-Diagnoses',
-       route: '/forum/post-diagnoses',
+       name: 'Post-Diagnosis',
+       route: '/forum/post-diagnosis',
        description: 'Talk about testing, symptoms, and challenges'
    },
    {
