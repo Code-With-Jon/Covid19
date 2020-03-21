@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 export default function(props) {
 
@@ -6,10 +7,18 @@ export default function(props) {
       console.log('mounted')
    }, [])
 
-   //I need a subTopic collection and posts collection
+
+   //I need a posts collection and comment collection
    return (
       <div>
-         {/* {props.location.state.name} */}
+         <Link to={`${props.match.url}/create`} >
+            Create a Post
+         </Link>
+         <p>
+
+         {props.match.params.topic}
+         </p>
+
          
       </div>
    )

@@ -20,12 +20,18 @@ export default function NavBar() {
 
    return (
       <div>
-         <div>
-            <img src="https://cdn.pixabay.com/photo/2017/09/11/03/18/virus-icon-2737712_960_720.png" height="50px" alt="Logo"/>
-            <img src={Logo} />
-            <img src={avatar ? avatar : DefaultAvatar} alt="avatar" />
-            <button onClick={() => loginWithGoogle()}>Google Signin</button>
-            <button onClick={() => handleSignOut()}>Google Signout</button>
+         <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div style={{display: 'flex', flexDirection: 'row'}}>
+               <img src="https://cdn.pixabay.com/photo/2017/09/11/03/18/virus-icon-2737712_960_720.png" height="50px" alt="Logo" style={{alignSelf: "center"}}/>
+               <img src={Logo} style={{height: '20vh', marginTop: '-2vh'}}/>
+            </div>
+            <div style={{width: '83vw', textAlign: 'end'}}>
+               <div style={{}}>
+               <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="100px" style={{borderRadius: 50}}/>
+               </div>
+               <button onClick={() => loginWithGoogle()}>Google Signin</button>
+               <button onClick={() => handleSignOut()}>Google Signout</button>
+            </div>
          </div>
       </div>
    )
