@@ -60,6 +60,25 @@ export default function CreatePost(props) {
             wrapperClassName="wrapperClassName"
             editorClassName="editorClassName"
             onEditorStateChange={handleEditorStateChange}
+            toolbar={{
+               image: {
+                  
+                  // className: undefined,
+                  // component: undefined,
+                  // popupClassName: undefined,
+                  urlEnabled: false,
+                  uploadEnabled: true,
+                  alignmentEnabled: true,
+                  uploadCallback: true,
+                  previewImage: true,
+                  inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+                  alt: { present: false, mandatory: false },
+                  defaultSize: {
+                    height: 'auto',
+                    width: 'auto',
+                  },
+                },
+            }}
          />
          :
          <>
