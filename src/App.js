@@ -6,6 +6,7 @@ import LandingScreen from './Pages/LandingScreen/LandingScreen';
 import GeneralTopic from './Pages/general'
 import SubForum from './Pages/SubForum/SubForum';
 import CreatePost from './Pages/CreatePost/CreatePost';
+import Post from './Pages/Post/Post';
 import Footer from './Components/Footer/FooterComponent'
 //REDUX IMPORTS
 import { Provider } from 'react-redux';
@@ -35,8 +36,9 @@ function App() {
         <Router>
         <NavBar />
           <Route path="/" exact component={LandingScreen}/>
-          <Route path="/forum/:id" exact component={SubForum}/>
-          <Route path="/forum/:id/create" exact component={CreatePost}/>
+          <Route path="/forum/:topic" exact component={SubForum}/>
+          <Route path="/forum/:topic/create" exact component={CreatePost}/>
+          <Route path="/forum/:topic/:post" exact component={Post}/>
 
         </Router>
         <Footer />
