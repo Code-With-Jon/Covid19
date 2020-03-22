@@ -45,7 +45,15 @@ var url = 'http://newsapi.org/v2/top-headlines?' +
 return(
  <div>
      <ScrollText />
-
+     <div style={{display: 'flex', flexDirection: 'row'}}>
+<div style={{display: 'flex', flexDirection: 'column', width: '70vw'}}>
+        <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column', width: '30vw'}}>
+        <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="100%"/>
+        </div> 
+ </div>
+    <h2 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '2vh', color: 'white', background: 'rgba(0,0,0,.87)', width: '20vw'}}>Latest News</h2>
      <div id='news-articles' style={{display: 'flex', overflow: 'scroll', height: '20vh'}}>
 {newsArticles && newsArticles.map((newsArticle, index) => {
 
@@ -69,14 +77,10 @@ return(
     }
     
 </div>
-<div>
-  <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
-  </div>
+
    <Topics />
 <div style={{height: '100%', width: '100%'}}>
- <div>
- <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
- </div> 
+ 
 
 </div>
 <div>
