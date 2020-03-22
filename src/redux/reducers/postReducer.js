@@ -25,23 +25,23 @@ const reducer = (state = initialState, action) => {
             ...state,
             isAddingPost: false,
          };
-         case "POSTADD_FAILURE":
-            return {
-               ...state,
-               isAddingPost: false,
-               addPostError: true,
-               addPostErrorMessage: action.payload,
-            };
-         case "FETCH_TOPIC_POSTS":
-            return {
-               ...state,
-               [action.payload.topic]: action.payload.data,
-            };
-         case "FETCH_POST":
-            return {
-               ...state,
-               docs: action.payload,
-            };
+      case "POSTADD_FAILURE":
+         return {
+            ...state,
+            isAddingPost: false,
+            addPostError: true,
+            addPostErrorMessage: action.payload,
+         };
+      case "FETCH_TOPIC_POSTS":
+         return {
+            ...state,
+            [action.payload.topic]: action.payload.data,
+         };
+      case "FETCH_POST":
+         return {
+            ...state,
+            docs: action.payload,
+         };
       default:
          return state;
 

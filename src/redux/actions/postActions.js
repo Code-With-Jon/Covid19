@@ -11,9 +11,6 @@ export const addPost = (data) => {
          postOwner: uid,
          topic: data.topic,
          title: data.title,
-         // [uid]: true,
-         // [data.otherUser]: true,
-         // lastMessage: firestore.FieldValue.serverTimestamp(),
          contentJSON: data.contentJSON,
          createdAt: firestore.FieldValue.serverTimestamp(),
       }).then(docRef => {
@@ -25,6 +22,31 @@ export const addPost = (data) => {
       })
 
 
+   }
+}
+
+export const addComment = (data) => {
+   return async (dispatch, getState, { getFirebase, getFirestore }) => {
+      dispatch({type: "COMMENTDD_REQUEST"})
+      const firestore = getFirestore();
+      const uid = getState().firebase.auth.uid;
+   
+      return firestore.collection('posts').doc(data.postId).collection('comments')
+      .add({
+         commentOwner: uid,
+         topic: data.topic,
+         parent: data.parentId,
+         postId: data.postId,
+         content: data.content,
+         createdAt: firestore.FieldValue.serverTimestamp(),
+      }).then(docRef => {
+         dispatch({type: "COMMENTADD_SUCCESS"})
+         // return docRef.id
+      }).catch(err => {
+         dispatch({type: "COMMENTADD_FAILURE", payload: err.message})
+         console.log(err);
+      })
+   
    }
 }
 
@@ -73,6 +95,32 @@ export const fetchPost = (id) => {
                      ...doc.data()
                   }
                }
+            })
+         }).catch((err) => {
+            console.log(err);
+            //NOTE: err has a err.message property that contains the string of the error, we can use it if we want.
+         })
+   }
+}
+
+export const fetchComments = (postId) => {
+   return (dispatch, getState, { getFirebase, getFirestore }) => {
+      const firestore = getFirestore();
+      // const postDocs = getState().post.docs;
+      const commentDocs = [];
+      //NOTE: updating the firestore will automatically update our redux state.firebase.profile state.
+      firestore.collection('posts').doc(postId).collection('comments').get()
+         .then((docsSnapshot) => {
+            // console.log(doc.data());
+            docsSnapshot.forEach((doc) => {
+               commentDocs.push( {
+                  id: doc.id,
+                  ...doc.data(),
+               } )
+            } )
+
+            dispatch({
+               type: "FETCH_TOPIC_POSTS", payload: commentDocs
             })
          }).catch((err) => {
             console.log(err);
