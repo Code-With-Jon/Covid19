@@ -22,7 +22,14 @@ export default function(props) {
 
    //I need a posts collection and comment collection
    return (
-      <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
+      <div>
+
+         <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
+         </div>
+         <div>
+            {/* comments go here */}
+         </div>
+         
       </div>
    )
 }
