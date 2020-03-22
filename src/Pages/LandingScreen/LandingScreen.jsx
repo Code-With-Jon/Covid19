@@ -69,14 +69,17 @@ return(
     }
     
 </div>
-<div>
-  <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
-  </div>
+<div style={{display: 'flex', flexDirection: 'row'}}>
+<div style={{display: 'flex', flexDirection: 'column', width: '70vw'}}>
+        <IframeComponent src="//datawrapper.dwcdn.net/dlpln/1/" height="100%" width="100%"/>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column', width: '30vw'}}>
+        <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="100%"/>
+        </div> 
+ </div>
    <Topics />
 <div style={{height: '100%', width: '100%'}}>
- <div>
- <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="29%"/>
- </div> 
+ 
 
 </div>
 <div>

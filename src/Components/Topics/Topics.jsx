@@ -24,7 +24,7 @@ export default function Topics(props) {
 
    return (
       <div>
-         <h1>Categories</h1>
+         <h1 style={{marginLeft: '6vw'}}>Categories</h1>
          {topicsRoutes.map((topic, index) => {
             return (
           
@@ -46,8 +46,8 @@ export default function Topics(props) {
 
 
 
-<Segment basic>
-<Message style={{backgroundColor: 'white', boxShadow: "1px 3px 1px #9E9E9E"}}>
+<Segment basic style={{ display: 'flex', justifyContent: 'center'}}>
+<Message style={{backgroundColor: 'white', boxShadow: "3px 3px 2px 2px #9E9E9E", width: '80vw',}}>
 
 <Grid columns={2} relaxed='very' stackable>
   <Grid.Column>
@@ -57,7 +57,7 @@ export default function Topics(props) {
     <p>
     {topic.description}
     </p>
-    <Button color='blue'>Learn more &raquo;</Button>
+    <Button color='blue'>DISCUSS &raquo;</Button>
     </Link>
 
   </Grid.Column>
