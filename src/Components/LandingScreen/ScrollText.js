@@ -10,7 +10,8 @@ function ScrollText() {
     return randomNumber
   }
 return(
-    <Ticker>
+  <div style={{borderBottom: '1px solid black'}}>
+    <Ticker >
         {({ index }) => (
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <img src="https://www.trackcorona.live/static/corona/images/svg/doctor.svg" alt="" height='50px' />
@@ -23,6 +24,7 @@ return(
             </div>
         )}
     </Ticker>
+    </div>
 )
 }
 export default ScrollText
