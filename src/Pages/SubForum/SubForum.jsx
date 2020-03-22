@@ -8,7 +8,7 @@ export default function(props) {
 
    const topic = props.match.params.topic;
 
-   const postDocs = useSelector(state => state.post[topic]);
+   const postDocs = useSelector(state => state.post);
    const dispatch = useDispatch();
 
 
@@ -17,16 +17,16 @@ export default function(props) {
       console.log('mounted')
    }, [])
 
-   function getHtmlString(doc) {
-      return draftToHtml(doc.contentJSON)
-   }
 
 
    function renderPosts() {
-      if (postDocs.length >= 1) {
-         return postDocs.map( (doc, index) => {
+      if (postDocs[topic] && postDocs[topic].length >= 1) {
+         return postDocs[topic].map( (doc, index) => {
             return (
-               <div key={index} dangerouslySetInnerHTML={{__html: getHtmlString(doc)}} style={{border: '1px solid black'}}>
+               <div key={index}>
+                  <Link to={`${props.match.url}/${doc.id}`}>
+                     {doc.title}
+                  </Link>
                </div>
             )
          } )

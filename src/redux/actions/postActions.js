@@ -10,6 +10,7 @@ export const addPost = (data) => {
          ],
          postOwner: uid,
          topic: data.topic,
+         title: data.title,
          // [uid]: true,
          // [data.otherUser]: true,
          // lastMessage: firestore.FieldValue.serverTimestamp(),
