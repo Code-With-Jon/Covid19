@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addComment} from '../../redux/actions/postActions';
 
 
-function Comment(props) {
+export default function Comment(props) {
 
    const [editEnabled, setEditEnabled] = useState(false);
    const [commentContent, setCommentContent] = useState('');
