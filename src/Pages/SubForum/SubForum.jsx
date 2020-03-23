@@ -20,8 +20,8 @@ export default function(props) {
 
 
    function renderPosts() {
-      if (postDocs[topic] && postDocs[topic].length >= 1) {
-         return postDocs[topic].map( (doc, index) => {
+      if (postDocs[topic] && postDocs[topic].docsArray.length >= 1) {
+         return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <div key={index}>
                   <Link to={`${props.match.url}/${doc.id}`}>

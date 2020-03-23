@@ -3,12 +3,25 @@ const initialState = {
    addPostError: false,
    addPostErrorMessage: '',
    docs: {},
-   general: [],
-   'pre-diagnosis': [],
-   'post-diagnosis': [],
-   'personal-loss': [],
-   'income-loss': [],
-   'economy-outlook': [],
+   comments: {},
+   general: {
+      docsArray: [],
+   },
+   'pre-diagnosis': {
+      docsArray: [],
+   },
+   'post-diagnosis': {
+      docsArray: [],
+   },
+   'personal-loss': {
+      docsArray: [],
+   },
+   'income-loss': {
+      docsArray: [],
+   },
+   'economy-outlook': {
+      docsArray: [],
+   }
 }
 
 //reducer takes in state = initialState, and the action which will include a type that we are evaluating. Usually you use a switch for action types. NOTE: based on the action, the property name of the payload data will be the name of the variable passed in the action.
@@ -41,6 +54,11 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             docs: action.payload,
+         };
+      case "FETCH_COMMENTS":
+         return {
+            ...state,
+            comments: action.payload,
          };
       default:
          return state;
