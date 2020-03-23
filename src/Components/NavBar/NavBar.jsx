@@ -17,7 +17,18 @@ export default function NavBar(props) {
     function handleSignOut() {
        dispatch(signOut())
       }
-      
+
+
+     const handleScrollTo = (elRef) => {
+         // Incase the ref supplied isn't ref.current
+         const el = elRef.current ? elRef.current : elRef
+         
+         // Scroll the element into view
+         el.scrollIntoView({
+           behavior: 'smooth',
+           block: 'start'
+         })
+       }
 
 
    return (
@@ -30,7 +41,16 @@ export default function NavBar(props) {
             </div>
             </Link>
             <div style={{width: '83vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            
+            <nav>
+          <ul>
+            <li onClick={() => { this.handleScrollTo(this.refA) }}>
+              Programs
+            </li>
+            <li onClick={() => { this.handleScrollTo(this.refB) }}>
+              About
+            </li>
+          </ul>
+        </nav>
                     
                         <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
                         {!avatar ? 
