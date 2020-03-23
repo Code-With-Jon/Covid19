@@ -46,7 +46,7 @@ return(
 <YoutubeList />
 
 </div>
-<div style={{display: 'flex', flexDirection: 'column', width: '100vw', height: '60vh'}}>
+<div style={{display: 'flex', flexDirection: 'column', width: '100vw', height: '60vh', overflow: 'scroll'}}>
         <IframeComponent src="https://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61" height="550vh" width="100%"/>
         </div>
     </div>
