@@ -43,7 +43,7 @@ render(){
                 openExternal: true,
               },
               {
-                title: 'Trackcorona',
+                title: 'TRACKCORONA',
                 url: 'https://www.trackcorona.live/',
                 openExternal: true,
               },
