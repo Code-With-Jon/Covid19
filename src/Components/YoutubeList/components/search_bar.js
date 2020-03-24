@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; //Always need in JSX files
-
+import { Input } from 'semantic-ui-react'
 // Create the HTML to return for the input
 class SearchBar extends Component {
   constructor(props) {
@@ -16,11 +16,13 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="search-bar" style={{margin: "20px", textAlign: "center"}}>
-        <input
+        <Input icon='search' focus placeholder='Search...' value={this.state.term}
+          onChange={event => this.onInputChange(event.target.value)} style = {{ width: "40%" }}/>
+        {/* <input
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
           style = {{ width: "75%" }}
-        />
+        /> */}
       </div>
     );
   }

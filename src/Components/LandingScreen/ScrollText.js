@@ -1,6 +1,6 @@
 import React from 'react'
 import Ticker from 'react-ticker'
-var count = 0;
+ let randomNumber;
 function ScrollText() {
 
   
