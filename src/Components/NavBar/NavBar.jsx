@@ -41,7 +41,7 @@ export default function NavBar(props) {
                <img src={Logo} style={{height: '20vh', marginTop: '-2vh'}}/>
             </div>
             </Link>
-            <div style={{width: '70vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+            <div style={{width: '77vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <nav>
           <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
             <li onClick={() => { this.handleScrollTo(this.refA) }}>
