@@ -1,10 +1,10 @@
 import React from 'react'
 import Ticker from 'react-ticker'
-var count;
+var count = 0;
 function ScrollText() {
 
   function rand(count) {
-     count = 0;
+
 
     if (count !== 0 && count === quotes.length){
       count = 0;
@@ -20,7 +20,7 @@ return(
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <img src="https://www.trackcorona.live/static/corona/images/svg/doctor.svg" alt="" height='50px' />
               {/* <div> */}
-            <h1 style={{marginRight: '10vw'}}>{quotes[rand(count)]}</h1>
+            <h1 style={{marginRight: '10vw'}}>{quotes[rand(index)]}</h1>
             {/* </div> */}
             {/* <div style={{padding: '5px'}}> */}
                 
