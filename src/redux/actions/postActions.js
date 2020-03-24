@@ -14,18 +14,36 @@ export const addPost = (data) => {
          upvotes: [],
          downvotes: [],
          contentJSON: data.contentJSON,
+         commentCount: 0,
       }
 
-      return firestore.collection('posts').add({
-         ...uploadData,
-         createdAt: firestore.FieldValue.serverTimestamp(),
-      }).then(docRef => {
-         dispatch({type: "POSTADD_SUCCESS"})
-         return docRef.id
-      }).catch(err => {
+      try {
+         //Update counter
+         await firestore.collection('counter').doc('posts').set({
+            [data.topic]: {
+               count: firestore.FieldValue.increment(1),
+               latestPost: {
+                  ...uploadData,
+                  createdAt: firestore.FieldValue.serverTimestamp(),
+               }
+            },
+         })
+
+         return firestore.collection('posts').add({
+            ...uploadData,
+            createdAt: firestore.FieldValue.serverTimestamp(),
+         }).then(docRef => {
+            dispatch({type: "POSTADD_SUCCESS"})
+            return docRef.id
+         }).catch(err => {
+            dispatch({type: "POSTADD_FAILURE", payload: err.message})
+            console.log(err);
+         })
+
+      }
+      catch(err) {
          dispatch({type: "POSTADD_FAILURE", payload: err.message})
-         console.log(err);
-      })
+      }
 
 
    }
@@ -45,6 +63,17 @@ export const addComment = (data) => {
          parentId: data.parentId,
          postId: data.postId,
          content: data.content,
+      }
+
+      try {
+         //Update counter and update participants in the post
+         await firestore.collection('posts').doc(data.postId).set({
+            // commentCount: ,
+         })
+
+      }
+      catch(err) {
+
       }
 
       return firestore.collection('posts').doc(data.postId).collection('comments')

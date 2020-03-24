@@ -9,7 +9,7 @@ export const signInGmail = () => {
       dispatch({ type: 'LOGIN_REQUEST' })
 
       try {
-         //Custom parameter set in rrf config
+         //Custom parameters are set in rrf config
          await firebase.login({ provider: 'google', type: 'popup' })
          // console.log('wow')
       }
