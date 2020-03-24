@@ -3,8 +3,8 @@ export const addPost = (data) => {
       dispatch({type: "POSTADD_REQUEST"})
       const firestore = getFirestore();
       const uid = getState().firebase.auth.uid;
-
-      return firestore.collection('posts').add({
+      const postDocs = getState().post.docs;
+      const uploadData = {
          participants: [
             uid
          ],
@@ -14,6 +14,10 @@ export const addPost = (data) => {
          upvotes: [],
          downvotes: [],
          contentJSON: data.contentJSON,
+      }
+
+      return firestore.collection('posts').add({
+         ...uploadData,
          createdAt: firestore.FieldValue.serverTimestamp(),
       }).then(docRef => {
          dispatch({type: "POSTADD_SUCCESS"})
@@ -32,16 +36,48 @@ export const addComment = (data) => {
       dispatch({type: "COMMENTDD_REQUEST"})
       const firestore = getFirestore();
       const uid = getState().firebase.auth.uid;
-   
-      return firestore.collection('posts').doc(data.postId).collection('comments')
-      .add({
+
+      const commentObject = getState().post.comments;
+
+      const uploadData = {
          commentOwner: uid,
          topic: data.topic,
          parentId: data.parentId,
          postId: data.postId,
          content: data.content,
+      }
+
+      return firestore.collection('posts').doc(data.postId).collection('comments')
+      .add({
+         ...uploadData,
          createdAt: firestore.FieldValue.serverTimestamp(),
       }).then(docRef => {
+
+         //So that person does not have to refresh to see his just posted comment.
+         if (commentObject[data.postId]) {
+            commentObject[data.postId].unshift({
+               ...uploadData,
+               id: docRef.id,
+               createdAt: {
+                  seconds: Math.floor(new Date().getTime() / 1000)
+               },
+            })
+         } else {
+            commentObject[data.postId] = [{
+               ...uploadData,
+               id: docRef.id,
+               createdAt: {
+                  seconds: Math.floor(new Date().getTime() / 1000)
+               },
+            }]
+         }
+         dispatch({
+            type: "FETCH_COMMENTS", payload: {
+               ...commentObject
+            },
+         })
+
+
          dispatch({type: "COMMENTADD_SUCCESS"})
          // return docRef.id
       }).catch(err => {
@@ -88,7 +124,7 @@ export const fetchPost = (id) => {
       const firestore = getFirestore();
       const postDocs = getState().post.docs;
       //NOTE: updating the firestore will automatically update our redux state.firebase.profile state.
-      firestore.get({ collection: 'posts', doc: id })
+      return firestore.get({ collection: 'posts', doc: id })
          .then((doc) => {
             // console.log(doc.data());
 
@@ -100,8 +136,9 @@ export const fetchPost = (id) => {
                   }
                }
             })
+            return doc;
          }).catch((err) => {
-            console.log(err);
+            return err;
             //NOTE: err has a err.message property that contains the string of the error, we can use it if we want.
          })
    }

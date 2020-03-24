@@ -74,7 +74,7 @@ export default function CreatePost(props) {
    return (
       <div>
          <button onClick={() => createPost()}>Save</button>
-        <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+         <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
          <Editor
             placeholder="Type your Post!"
             editorState={editorState}

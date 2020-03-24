@@ -20,19 +20,24 @@ export default function Comment(props) {
       setEditEnabled(!editEnabled)
    }
 
-   const nestedComments = (props.comment.children || []).map(comment => {
-      return <Comment comment={comment} />;
-    });
+   function nestedComments() { 
+      if (props.comment.children) {
+         return props.comment.children.map( (comment, index) => {
+            return <Comment key={index} comment={comment} nestLevel={props.nestLevel + 1} />;
+         });
+      }
+      return;
+   }
 
    return (
-      <div>
+      <div style={{marginLeft: 10}}>
+         <div>
+            {props.comment.content}
+         </div>
          {editEnabled ?
          <> 
-            <div>
-               {props.comment.content}
-            </div>
             <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
-            <button onClick={() => saveComment()} >Save</button>
+            <button onClick={() => saveComment()} >Post</button>
             <button onClick={() => setEditEnabled(!editEnabled)} >Cancel</button>
          </>
          :
@@ -41,7 +46,7 @@ export default function Comment(props) {
          </>
          }
          <div>
-            {nestedComments}
+            {nestedComments()}
          </div>
       </div>
    )

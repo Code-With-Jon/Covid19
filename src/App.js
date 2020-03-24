@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './Components/NavBar/NavBar';
 import './App.css';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import LandingScreen from './Pages/LandingScreen/LandingScreen';
 import GeneralTopic from './Pages/general'
 import SubForum from './Pages/SubForum/SubForum';
@@ -34,14 +34,15 @@ function App() {
       <ReactReduxFirebaseProvider
         {...rrfProps}>
         <Router>
-        <NavBar />
-          <Route path="/" exact component={LandingScreen}/>
-          <Route path="/forum/:topic" exact component={SubForum}/>
-          <Route path="/forum/:topic/create" exact component={CreatePost}/>
-          <Route path="/forum/:topic/:post" exact component={Post}/>
-
+          <NavBar />
+          <Switch>
+            <Route path="/" exact component={LandingScreen}/>
+            <Route path="/forum/:topic" exact component={SubForum}/>
+            <Route path="/forum/:topic/create" exact component={CreatePost}/>
+            <Route path="/forum/:topic/:post" exact component={Post}/>
+          </Switch>
+          <Footer />
         </Router>
-        <Footer />
       </ReactReduxFirebaseProvider>
     </Provider>
   );
