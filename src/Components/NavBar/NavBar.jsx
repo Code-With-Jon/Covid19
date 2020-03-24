@@ -42,12 +42,15 @@ export default function NavBar(props) {
             </Link>
             <div style={{width: '78vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <nav>
-          <ul>
+          <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
             <li onClick={() => { this.handleScrollTo(this.refA) }}>
-              Programs
+              HOME
             </li>
-            <li onClick={() => { this.handleScrollTo(this.refB) }}>
-              About
+            <li style={{paddingLeft: '2vw', paddingRight: '2vw'}} onClick={() => { this.handleScrollTo(this.refB) }}>
+              METRICS
+            </li>
+            <li onClick={() => { this.handleScrollTo(this.refC) }}>
+              LEARN
             </li>
           </ul>
         </nav>
