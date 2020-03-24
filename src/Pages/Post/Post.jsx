@@ -134,7 +134,7 @@ export default function(props) {
             </Header>
          <div style={{marginLeft: '10vw'}}>
             {nestComments()}
-            </div>
+         </div>
          </Comment.Group>
 
       </div>
