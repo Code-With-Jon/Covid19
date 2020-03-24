@@ -29,10 +29,16 @@ export const addPost = (data) => {
             },
          }, {merge: true})
 
+         //Update user profile reference to post and topic.
+
          return firestore.collection('posts').add({
             ...uploadData,
             createdAt: firestore.FieldValue.serverTimestamp(),
          }).then(docRef => {
+            firestore.collection('users').doc(uid).set({
+               activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
+               activePosts: firestore.FieldValue.arrayUnion(docRef.id)
+            }, {merge: true});
             dispatch({type: "POSTADD_SUCCESS"})
             return docRef.id
          }).catch(err => {
@@ -71,6 +77,11 @@ export const addComment = (data) => {
             commentCount: firestore.FieldValue.increment(1),
             participants: firestore.FieldValue.arrayUnion(uid),
          }, {merge: true})
+
+         await firestore.collection('users').doc(uid).set({
+            // activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
+            activePosts: firestore.FieldValue.arrayUnion(data.postId)
+         }, {merge: true});
 
 
          return firestore.collection('posts').doc(data.postId).collection('comments')

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
+import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
 
 export default function(props) {
@@ -14,6 +15,7 @@ export default function(props) {
 
    useEffect( () => {
       dispatch(fetchTopicPosts(topic))
+      dispatch(fetchUsers({field: 'activeTopicsOP', value: topic}))
       console.log('mounted')
    }, [])
 
