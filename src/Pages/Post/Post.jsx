@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import _ from 'lodash';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchPost, fetchComments, addComment} from '../../redux/actions/postActions';
+import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
 import {Link} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
@@ -31,6 +32,7 @@ export default function(props) {
       }
       asyncFetchPost();
       dispatch(fetchComments(postId));
+      dispatch(fetchUsers({field: 'activePosts', value: postId}))
       console.log('mounted')
    }, [])
 

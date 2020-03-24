@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 //import reducers here:
 import authReducer from './authReducer';
 import postReducer from './postReducer';
+import userReducer from './userReducer';
 //This is a premade reducer for syncing our data from our firestore to our state.
 import { firestoreReducer } from 'redux-firestore';
 //This is a premade reducer for syncing our data with stuff from firebase such as authentication/ authenticated users.
