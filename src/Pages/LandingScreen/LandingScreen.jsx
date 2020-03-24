@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import IframeComponent from '../../Components/Map'
 import YoutubeList from '../../Components/YoutubeList';
 import Topics from '../../Components/Topics/Topics';
-import { useEffect, useState } from 'react';
+import {useDispatch} from 'react-redux';
+import {fetchCounter} from '../../redux/actions/postActions';
 import ScrollText from '../../Components/LandingScreen/ScrollText'
 import NewsCard from '../../Components/LandingScreen/NewsCard';
 
 
 export default function Landing() {
-  
+    const dispatch = useDispatch();
+    useEffect( () => {
+        dispatch(fetchCounter());
+    }, [])
 return(
  <div>
      <ScrollText />

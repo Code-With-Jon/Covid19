@@ -21,7 +21,8 @@ const initialState = {
    },
    'economy-outlook': {
       docsArray: [],
-   }
+   },
+   counter: {},
 }
 
 //reducer takes in state = initialState, and the action which will include a type that we are evaluating. Usually you use a switch for action types. NOTE: based on the action, the property name of the payload data will be the name of the variable passed in the action.
@@ -59,6 +60,11 @@ const reducer = (state = initialState, action) => {
          return {
             ...state,
             comments: action.payload,
+         };
+      case "FETCH_COUNTER":
+         return {
+            ...state,
+            counter: action.payload,
          };
       default:
          return state;

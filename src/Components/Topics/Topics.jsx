@@ -1,5 +1,6 @@
 import React from 'react';
-import './Topics.css'
+import {useSelector} from 'react-redux';
+import './Topics.css';
 import {Link} from 'react-router-dom';
 import topicsRoutes from '../../utils/topicsRoutes';
 import {
@@ -21,6 +22,7 @@ import {
 
 export default function Topics(props) {
 
+   const counter = useSelector(state => state.post.counter);
 
    return (
       <div>
@@ -66,8 +68,8 @@ export default function Topics(props) {
   <Segment basic textAlign='center'>
      <div style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between'}}>
         <div>
-     <h4>Topics</h4>
-     <p>2</p>
+     <h4>Posts</h4>
+         <p>{counter[topic.topicId] ? counter[topic.topicId].count : 0}</p>
      </div>
      <div>
      <h4>Users</h4>
@@ -77,7 +79,7 @@ export default function Topics(props) {
       <Divider horizontal>-</Divider>
 
       <h4>Lastest Topic</h4>
-      <p>This is a test subject</p>
+      <p>{counter[topic.topicId] ? counter[topic.topicId].latestPost.title : "No Posts Yet"}</p>
    </Segment>   
   </Grid.Column>
  
