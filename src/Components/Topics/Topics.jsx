@@ -49,9 +49,9 @@ export default function Topics(props) {
 
 
 <Segment basic style={{ display: 'flex', justifyContent: 'center'}}>
-<Message style={{backgroundColor: 'white', boxShadow: "3px 3px 2px 2px #9E9E9E", width: '80vw',}}>
+<Message style={{backgroundColor: 'white', boxShadow: "3px 3px 2px 2px #9E9E9E", width: '65vw',}}>
 
-<Grid columns={2} relaxed='very' stackable>
+<Grid columns={2} relaxed='very' stackable style={{alignItems: 'center'}}>
   <Grid.Column>
  
   <Link key={index} to={topic.route} style={{}}>
