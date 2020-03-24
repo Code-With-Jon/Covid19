@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchPost, fetchComments, addComment} from '../../redux/actions/postActions';
 import draftToHtml from 'draftjs-to-html';
 import {Link} from 'react-router-dom';
-import Comment from '../../Components/Comment/Comment';
+import Comments from '../../Components/Comment/Comment';
+import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
 export default function(props) {
 
@@ -74,7 +75,7 @@ export default function(props) {
       });
 
       return nestedComments.map( (comment, index) => {
-         return <Comment key={index} comment={comment} nestLevel={1} />;
+         return <Comments key={index} comment={comment} nestLevel={1} />;
       });
     }
 
@@ -98,23 +99,40 @@ export default function(props) {
       <div>
 
          <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
+      
          </div>
 
          {editEnabled ?
          <> 
-            <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
-            <button onClick={() => saveComment()} >Post</button>
-            <button onClick={() => setEditEnabled(!editEnabled)} >Cancel</button>
+            <Form reply>
+             <Form.TextArea name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+             <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
+             <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+             {/* <button  >Post</button>
+            <button  >Cancel</button> */}
+            </Form>
+            {/* <input type="text" /> */}
+           
          </>
+        
          :
          <>
-            <button onClick={() => setEditEnabled(!editEnabled)} >Reply</button>
+             <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+            {/* <button  >Reply</button> */}
          </>
          }
 
 
          {/* comments go here, needs to be mapped once data is working */}
+         <Comment.Group>
+         <Header as='h3' dividing>
+           Comments
+         </Header>
+      
+         </Comment.Group>
+         <Comment.Group>
          {nestComments()}
+         </Comment.Group>
 
       </div>
    )
