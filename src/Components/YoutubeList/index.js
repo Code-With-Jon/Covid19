@@ -47,7 +47,7 @@ export default class YoutubeList extends React.Component {
   
       return (
         <div>
-          <h5>Youtube Search:</h5><SearchBar onSearchTermChange={videoSearch} />
+          <h3 style={{marginLeft: '30vw'}}>Youtube Search:</h3><SearchBar onSearchTermChange={videoSearch} />
           <VideoDetail video={this.state.selectedVideo} />
           <VideoList
             onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
