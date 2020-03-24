@@ -134,7 +134,7 @@ export const fetchTopicPosts = (topic) => {
       // const postDocs = getState().post.docs;
       const postDocsArray = [];
       //NOTE: updating the firestore will automatically update our redux state.firebase.profile state.
-      firestore.get({ collection: 'posts', where: [ ['topic', '==', topic] ], orderBy: ['createdAt', 'asc'] })
+      firestore.get({ collection: 'posts', where: [ ['topic', '==', topic] ], orderBy: ['createdAt', 'desc'] })
          .then((docsSnapshot) => {
             // console.log(doc.data());
             docsSnapshot.forEach((doc) => {
@@ -191,7 +191,7 @@ export const fetchComments = (postId) => {
       const commentDocsArray = [];
       // const commentDocs = {}
       //NOTE: updating the firestore will automatically update our redux state.firebase.profile state.
-      firestore.collection('posts').doc(postId).collection('comments').orderBy("createdAt", "desc").get()
+      firestore.collection('posts').doc(postId).collection('comments').orderBy("createdAt", "asc").get()
          .then((docsSnapshot) => {
             // console.log(doc.data());
             docsSnapshot.forEach((doc) => {
