@@ -103,33 +103,36 @@ export default function(props) {
          </div>
 
          {editEnabled ?
-         <> 
-            <Form reply>
-             <Form.TextArea name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+         <div>
+            <Form reply >
+             <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+             <div style={{marginLeft: '26vw'}}>
              <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
              <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+             </div>
              {/* <button  >Post</button>
             <button  >Cancel</button> */}
             </Form>
             {/* <input type="text" /> */}
            
-         </>
+         </div>
         
          :
-         <>
+         <div style={{marginLeft: '28vw'}}>
              <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
             {/* <button  >Reply</button> */}
-         </>
+         </div>
          }
 
 
          {/* comments go here, needs to be mapped once data is working */}
          <Comment.Group>
-            <Header as='h3' dividing>
+            <Header as='h3' dividing style={{marginLeft: '10vw'}}>
             Comments
             </Header>
-         
+         <div style={{marginLeft: '10vw'}}>
             {nestComments()}
+            </div>
          </Comment.Group>
 
       </div>
