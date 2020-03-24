@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {addComment} from '../../redux/actions/postActions';
+import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
-
-export default function Comment(props) {
+export default function Comments(props) {
 
    const [editEnabled, setEditEnabled] = useState(false);
    const [commentContent, setCommentContent] = useState('');
@@ -21,33 +21,55 @@ export default function Comment(props) {
    }
 
    function nestedComments() { 
+   
       if (props.comment.children) {
          return props.comment.children.map( (comment, index) => {
-            return <Comment key={index} comment={comment} nestLevel={props.nestLevel + 1} />;
+            return <Comments key={index} comment={comment} nestLevel={props.nestLevel + 1} />;
          });
       }
       return;
    }
 
    return (
-      <div style={{marginLeft: 10}}>
-         <div>
-            {props.comment.content}
-         </div>
-         {editEnabled ?
+      <div style={{marginLeft: 15}}>
+            <Comment>
+            <Comment.Avatar src='https://lh3.googleusercontent.com/a-/AOh14GiUFG2OTzQg56hy_DO5Bm3SyRp8wPVV-X18Nwqk4g' />
+            <Comment.Content>
+              <Comment.Author as='a'>Matt</Comment.Author>
+              <Comment.Metadata>
+                <div>Today at 5:42PM</div>
+              </Comment.Metadata>
+              <Comment.Text>{props.comment.content}</Comment.Text>
+              <Comment.Actions>
+              {editEnabled ?
          <> 
             <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
-            <button onClick={() => saveComment()} >Post</button>
-            <button onClick={() => setEditEnabled(!editEnabled)} >Cancel</button>
+            <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
+            <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
+            {/* <button  >Post</button>
+            <button  >Cancel</button> */}
          </>
          :
          <>
-            <button onClick={() => setEditEnabled(!editEnabled)} >Reply</button>
+           <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
+            {/* <button  >Reply</button> */}
          </>
          }
+              </Comment.Actions>
+            </Comment.Content>
+          </Comment>
          <div>
-            {nestedComments()}
+            
          </div>
+        
+           
+         <div>
+            <Comment.Group>
+            {nestedComments()}
+            </Comment.Group>
+         </div>
+      
       </div>
+     
    )
 }
