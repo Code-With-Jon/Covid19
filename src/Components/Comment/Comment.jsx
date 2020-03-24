@@ -31,7 +31,7 @@ export default function Comments(props) {
    }
 
    return (
-      <div style={{marginLeft: 15}}>
+      <div style={{}}>
             <Comment>
             <Comment.Avatar src='https://lh3.googleusercontent.com/a-/AOh14GiUFG2OTzQg56hy_DO5Bm3SyRp8wPVV-X18Nwqk4g' />
             <Comment.Content>
@@ -63,11 +63,11 @@ export default function Comments(props) {
          </div>
         
            
-         <div>
+
             <Comment.Group>
             {nestedComments()}
             </Comment.Group>
-         </div>
+
       
       </div>
      
