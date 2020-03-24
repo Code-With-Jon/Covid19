@@ -29,12 +29,12 @@ export const addPost = (data) => {
             },
          }, {merge: true})
 
-         //Update user profile reference to post and topic.
 
          return firestore.collection('posts').add({
             ...uploadData,
             createdAt: firestore.FieldValue.serverTimestamp(),
          }).then(docRef => {
+            //Update user profile reference to post and topic.
             firestore.collection('users').doc(uid).set({
                activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
                activePosts: firestore.FieldValue.arrayUnion(docRef.id)
@@ -77,13 +77,13 @@ export const addComment = (data) => {
             commentCount: firestore.FieldValue.increment(1),
             participants: firestore.FieldValue.arrayUnion(uid),
          }, {merge: true})
-
          await firestore.collection('users').doc(uid).set({
             // activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
             activePosts: firestore.FieldValue.arrayUnion(data.postId)
          }, {merge: true});
 
 
+         //Add comment to database
          return firestore.collection('posts').doc(data.postId).collection('comments')
          .add({
             ...uploadData,

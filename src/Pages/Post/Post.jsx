@@ -11,6 +11,7 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react'
 export default function(props) {
 
    const postDocs = useSelector(state => state.post.docs);
+   const users = useSelector(state => state.user.allPosts);
    const commentsObject = useSelector(state => state.post.comments);
    const dispatch = useDispatch();
 
@@ -97,14 +98,21 @@ export default function(props) {
       setEditEnabled(!editEnabled)
    }
    
+   function returnUser() {
+      if (postDocs[postId] && users[postDocs[postId].postOwner]) {
+         return users[postDocs[postId].postOwner];
+      }
+      else return null
+   }
 
    //I need a posts collection and comment collection
    return (
       <div>
-
+         <h3>{postDocs[postId] && postDocs[postId].title}</h3>
          <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
       
          </div>
+         <p>Author: {returnUser() && returnUser().displayName}</p>
 
          {editEnabled ?
          <div>

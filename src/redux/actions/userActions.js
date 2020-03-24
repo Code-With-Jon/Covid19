@@ -15,14 +15,14 @@ export const fetchUsers = (params) => {
                } )
 
             } else if (params.field === "activePosts") {
-               usersObject.allPosts = getState().user.allPosts;
+               usersObject.allPosts = {...getState().user.allPosts};
                docsSnapshot.forEach((doc) => {
                   usersObject.allPosts[doc.id] = {
                      ...doc.data(),
                   } 
                })
             }
-            
+
             dispatch({
                type: "FETCH_USERS", payload: usersObject
             })

@@ -7,6 +7,9 @@ export default function Comments(props) {
 
    const [editEnabled, setEditEnabled] = useState(false);
    const [commentContent, setCommentContent] = useState('');
+
+   const users = useSelector(state => state.user.allPosts);
+
    const dispatch = useDispatch();
 
    function saveComment() {
@@ -35,11 +38,12 @@ export default function Comments(props) {
       return;
    }
 
+
    return (
       <Comment>
-         <Comment.Avatar src='https://lh3.googleusercontent.com/a-/AOh14GiUFG2OTzQg56hy_DO5Bm3SyRp8wPVV-X18Nwqk4g' />
+         <Comment.Avatar src={users[props.comment.commentOwner] ? users[props.comment.commentOwner].avatarUrl : null} />
          <Comment.Content>
-            <Comment.Author as='a'>Matt</Comment.Author>
+            <Comment.Author as='a'>{users[props.comment.commentOwner] && users[props.comment.commentOwner].displayName}</Comment.Author>
             <Comment.Metadata>
                <div>Today at 5:42PM</div>
             </Comment.Metadata>

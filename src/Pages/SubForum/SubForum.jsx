@@ -10,6 +10,7 @@ export default function(props) {
    const topic = props.match.params.topic;
 
    const postDocs = useSelector(state => state.post);
+   const users = useSelector(state => state.user[topic]);
    const dispatch = useDispatch();
 
 
@@ -27,7 +28,8 @@ export default function(props) {
             return (
                <div key={index}>
                   <Link to={`${props.match.url}/${doc.id}`}>
-                     {doc.title}
+                     <p>{doc.title}</p>
+                     <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
                   </Link>
                </div>
             )
