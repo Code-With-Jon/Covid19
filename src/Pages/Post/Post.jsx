@@ -73,6 +73,8 @@ export default function(props) {
       let nestedComments = commentList.filter(comment => {
         return comment.parentId === null;
       });
+      //Reverse the order so that root level comments are arranged by latest to earliest. We still want the nested comments to be earliest to latest tho.
+      nestedComments.reverse();
 
       return nestedComments.map( (comment, index) => {
          return <Comments key={index} comment={comment} nestLevel={1} />;

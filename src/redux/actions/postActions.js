@@ -81,7 +81,7 @@ export const addComment = (data) => {
    
             //So that person does not have to refresh to see his just posted comment, update the state locally as well.
             if (commentObject[data.postId]) {
-               commentObject[data.postId].unshift({
+               commentObject[data.postId].push({
                   ...uploadData,
                   id: docRef.id,
                   createdAt: {
@@ -134,7 +134,7 @@ export const fetchTopicPosts = (topic) => {
       // const postDocs = getState().post.docs;
       const postDocsArray = [];
       //NOTE: updating the firestore will automatically update our redux state.firebase.profile state.
-      firestore.get({ collection: 'posts', where: [ ['topic', '==', topic] ], orderBy: ['createdAt', 'desc'] })
+      firestore.get({ collection: 'posts', where: [ ['topic', '==', topic] ], orderBy: ['createdAt', 'asc'] })
          .then((docsSnapshot) => {
             // console.log(doc.data());
             docsSnapshot.forEach((doc) => {
