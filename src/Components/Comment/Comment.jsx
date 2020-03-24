@@ -23,9 +23,14 @@ export default function Comments(props) {
    function nestedComments() { 
    
       if (props.comment.children) {
-         return props.comment.children.map( (comment, index) => {
-            return <Comments key={index} comment={comment} nestLevel={props.nestLevel + 1} />;
-         });
+         return (
+            <Comment.Group threaded>
+               {props.comment.children.map( (comment, index) => {
+               return <Comments key={index} comment={comment} nestLevel={props.nestLevel + 1} />;
+            })}
+            </Comment.Group>
+         )
+         
       }
       return;
    }
@@ -54,9 +59,7 @@ export default function Comments(props) {
             </Comment.Actions>
          </Comment.Content>
         
-         <Comment.Group>
-            {nestedComments()}
-         </Comment.Group>
+         {nestedComments()}
 
       </Comment>
    )

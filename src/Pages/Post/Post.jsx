@@ -128,7 +128,7 @@ export default function(props) {
 
 
          {/* comments go here, needs to be mapped once data is working */}
-         <Comment.Group>
+         <Comment.Group threaded>
             <Header as='h3' dividing style={{marginLeft: '10vw'}}>
             Comments
             </Header>
