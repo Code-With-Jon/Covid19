@@ -4,6 +4,7 @@ import {signInGmail, signOut} from '../../redux/actions/authActions';
 import Logo from '../../TalkCovidLogo.png'
 import DefaultAvatar from '../../avatar-default.jpg'
 import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react'
 
 export default function NavBar(props) {
 
@@ -57,9 +58,9 @@ export default function NavBar(props) {
                     
                         <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
                         {!avatar ? 
-                        <button onClick={() => loginWithGoogle()}>Google Signin</button>
+                          <Button secondary onClick={() => loginWithGoogle()}>Google Signin</Button>
                         :
-                        <button onClick={() => handleSignOut()}>Google Signout</button>
+                        <Button secondary onClick={() => handleSignOut()}>Signout</Button>
                         }
             </div>
          </div>
