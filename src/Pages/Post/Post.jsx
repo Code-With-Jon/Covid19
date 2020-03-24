@@ -125,13 +125,11 @@ export default function(props) {
 
          {/* comments go here, needs to be mapped once data is working */}
          <Comment.Group>
-         <Header as='h3' dividing>
-           Comments
-         </Header>
-      
-         </Comment.Group>
-         <Comment.Group>
-         {nestComments()}
+            <Header as='h3' dividing>
+            Comments
+            </Header>
+         
+            {nestComments()}
          </Comment.Group>
 
       </div>

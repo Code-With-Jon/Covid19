@@ -31,45 +31,33 @@ export default function Comments(props) {
    }
 
    return (
-      <div style={{marginLeft: 15}}>
-            <Comment>
-            <Comment.Avatar src='https://lh3.googleusercontent.com/a-/AOh14GiUFG2OTzQg56hy_DO5Bm3SyRp8wPVV-X18Nwqk4g' />
-            <Comment.Content>
-              <Comment.Author as='a'>Matt</Comment.Author>
-              <Comment.Metadata>
-                <div>Today at 5:42PM</div>
-              </Comment.Metadata>
-              <Comment.Text>{props.comment.content}</Comment.Text>
-              <Comment.Actions>
-              {editEnabled ?
-         <> 
-            <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
-            <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
-            <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
-            {/* <button  >Post</button>
-            <button  >Cancel</button> */}
-         </>
-         :
-         <>
-           <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
-            {/* <button  >Reply</button> */}
-         </>
-         }
-              </Comment.Actions>
-            </Comment.Content>
-          </Comment>
-         <div>
-            
-         </div>
+      <Comment>
+         <Comment.Avatar src='https://lh3.googleusercontent.com/a-/AOh14GiUFG2OTzQg56hy_DO5Bm3SyRp8wPVV-X18Nwqk4g' />
+         <Comment.Content>
+            <Comment.Author as='a'>Matt</Comment.Author>
+            <Comment.Metadata>
+               <div>Today at 5:42PM</div>
+            </Comment.Metadata>
+            <Comment.Text>{props.comment.content}</Comment.Text>
+            <Comment.Actions>
+               {editEnabled ?
+               <> 
+                  <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
+                  <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
+                  <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
+               </>
+               :
+               <>
+                  <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
+               </>
+               }
+            </Comment.Actions>
+         </Comment.Content>
         
-           
-         <div>
-            <Comment.Group>
+         <Comment.Group>
             {nestedComments()}
-            </Comment.Group>
-         </div>
-      
-      </div>
-     
+         </Comment.Group>
+
+      </Comment>
    )
 }
