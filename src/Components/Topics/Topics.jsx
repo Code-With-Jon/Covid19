@@ -16,7 +16,8 @@ import {
    Message,
    Segment,
    Table,
-   Input
+   Input,
+   Advertisement
  } from 'semantic-ui-react'
  import 'semantic-ui-css/semantic.min.css'
 
@@ -27,6 +28,12 @@ export default function Topics(props) {
    return (
       <div>
          <h1 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '2vh', color: 'white', background: 'rgba(0,0,0,.87)', width: '20vw'}}>Categories</h1>
+         <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div style={{flexDirection: 'column', flexWrap: 'no-wrap'}}>
+            <div>
+         <Advertisement unit='skyscraper' test='Skyscraper' />
+         </div>
+         <div>
          {topicsRoutes.map((topic, index) => {
             return (
           
@@ -98,7 +105,10 @@ export default function Topics(props) {
               
             )
          })}
+         </div>
+         </div>
       </div>
+   </div>
    )
 }
 
