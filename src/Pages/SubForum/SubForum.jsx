@@ -31,12 +31,12 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <Item key={index}>
-                  <Item.Image src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
+                  <Item.Image style={{height: '100px', width: '100px', borderRadius: '50px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
                   <Item.Content>
                      <Item.Header as='a'>{doc.title}</Item.Header>
                      <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
                      <Item.Meta>
-                        <span className='cinema'>IFC</span>
+                        {/* <span className='cinema'>IFC</span> */}
                      </Item.Meta>
                      {/* <Item.Description>{paragraph}</Item.Description> */}
                      <Item.Extra>
