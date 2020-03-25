@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label } from 'semantic-ui-react';
+import topicRoutes from '../../utils/topicsRoutes';
 
 export default function(props) {
 
@@ -71,7 +72,7 @@ export default function(props) {
          </Link>
          <h1>
 
-         {props.match.params.topic}
+         {topicRoutes.find(element => element.topicId === props.match.params.topic).name}
          </h1>
          
          {renderPosts()}

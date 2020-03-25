@@ -6,7 +6,7 @@ import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
 import {Link} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header } from 'semantic-ui-react';
 
 export default function(props) {
 
