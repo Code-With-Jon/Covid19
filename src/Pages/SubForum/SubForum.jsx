@@ -4,9 +4,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react';
+import { Button, Icon, Image, Item, Label, Breadcrumb } from 'semantic-ui-react';
 import topicRoutes from '../../utils/topicsRoutes';
-import { Breadcrumb } from 'semantic-ui-react'
+import {scrollToTopSmooth} from '../../utils/helperFunctions';
 // import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 export default function(props) {
@@ -62,6 +62,7 @@ export default function(props) {
 
    function handleNavigate(route) {
       history.push(route)
+      scrollToTopSmooth();
    }
 
    //I need a posts collection and comment collection
@@ -70,12 +71,11 @@ export default function(props) {
            <Breadcrumb>
                <Breadcrumb.Section link onClick={() => handleNavigate('/')}>Home</Breadcrumb.Section>
                <Breadcrumb.Divider icon='right chevron' />
-               <Breadcrumb.Section link onClick={() => handleNavigate('/')}>{topicName}</Breadcrumb.Section>
+               <Breadcrumb.Section active>{topicName}</Breadcrumb.Section>
             </Breadcrumb>
-         <Link to={`${props.match.url}/create`} >
-         <Button  color="blue">Create Topic</Button>
-            
-         </Link>
+            <Link to={`${props.match.url}/create`} >
+               <Button  color="blue">Create Topic</Button>
+            </Link>
          <h1>
 
          {topicName}
