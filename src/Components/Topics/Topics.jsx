@@ -96,6 +96,7 @@ export default function Topics(props) {
       <div>
          {/* FOR JON: counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : null */}
      <h4>User</h4>
+     {/* <img src={} */}
      </div>
      </div>
    </Segment>   
