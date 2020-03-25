@@ -3,6 +3,7 @@ export const addPost = (data) => {
       dispatch({type: "POSTADD_REQUEST"})
       const firestore = getFirestore();
       const uid = getState().firebase.auth.uid;
+      const profile = getState().firebase.profile;
 
       const uploadData = {
          participants: [
@@ -24,6 +25,8 @@ export const addPost = (data) => {
                count: firestore.FieldValue.increment(1),
                latestPost: {
                   title: data.title,
+                  avatarUrl: profile.avatarUrl,
+                  displayName: profile.displayName,
                   createdAt: firestore.FieldValue.serverTimestamp(),
                }
             },
@@ -43,7 +46,6 @@ export const addPost = (data) => {
 
             //add Profile to users state so refetch is not needed.
             const usersObject = {};
-            const profile = getState().firebase.profile;
             usersObject.allPosts = {...getState().user.allPosts};
             usersObject.allPosts[data.postId] = {
                avatarUrl: profile.avatarUrl,
