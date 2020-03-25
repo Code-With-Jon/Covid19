@@ -6,7 +6,7 @@ import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
 import {Link} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Container } from 'semantic-ui-react'
 
 export default function(props) {
 
@@ -108,9 +108,9 @@ export default function(props) {
 
    //I need a posts collection and comment collection
    return (
-      <div>
-         <h3>{postDocs[postId] && postDocs[postId].title}</h3>
-         <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
+       <Container text>
+         <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>
+         <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{}}>
       
          </div>
          <p>Author: {returnUser() && returnUser().displayName}</p>
@@ -140,15 +140,15 @@ export default function(props) {
 
          {/* comments go here, needs to be mapped once data is working */}
          <Comment.Group threaded>
-            <Header as='h3' dividing style={{marginLeft: '10vw'}}>
+            <Header as='h3' dividing style={{ width: '40vw'}}>
             Comments
             </Header>
-         <div style={{marginLeft: '10vw'}}>
+         <div style={{marginLeft: '1vw'}}>
             {nestComments()}
          </div>
          </Comment.Group>
 
-      </div>
+      </Container>
    )
 }
 

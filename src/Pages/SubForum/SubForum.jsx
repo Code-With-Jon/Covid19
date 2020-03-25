@@ -30,7 +30,7 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <div key={index} >
-                  <Item.Group>
+                  <Item.Group divided>
                   <Item>
       <Item.Image src='/images/wireframe/image.png' />
 
