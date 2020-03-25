@@ -29,7 +29,7 @@ export default [
        name: 'Job/Income Loss',
        topicId: 'income-loss',
        route: '/forum/income-loss',
-       description: 'Talk about financial effects Covid 19 has had on you'
+       description: 'Talk about the financial effects Covid 19 has had on you'
    },
    {
        name: 'Economy Outlook',
