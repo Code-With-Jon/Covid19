@@ -95,6 +95,7 @@ export default function Topics(props) {
       </div>
       <div>
      <h4>User</h4>
+     {/* <img src={} */}
      </div>
      </div>
    </Segment>   
