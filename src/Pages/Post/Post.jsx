@@ -109,7 +109,7 @@ export default function(props) {
 
    //I need a posts collection and comment collection
    return (
-      <div>
+      <div style={{width: '80vw', marginLeft: 'auto', marginRight: 'auto'}}>
       <BreadcrumbComponent />
        <Container text>
         

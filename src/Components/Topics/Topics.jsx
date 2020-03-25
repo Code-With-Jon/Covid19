@@ -84,15 +84,19 @@ export default function Topics(props) {
      <h4>Posts</h4>
          <p>{counter[topic.topicId] ? counter[topic.topicId].count : 0}</p>
      </div>
-     <div>
-     <h4>Users</h4>
-     </div>
+    
      </div>
 
       <Divider horizontal>-</Divider>
-
+      <div style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between'}}>
+        <div>
       <h4>Lastest Topic</h4>
       <p>{counter[topic.topicId] ? counter[topic.topicId].latestPost.title : "No Posts Yet"}</p>
+      </div>
+      <div>
+     <h4>User</h4>
+     </div>
+     </div>
    </Segment>   
   </Grid.Column>
  
