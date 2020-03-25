@@ -4,10 +4,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchPost, fetchComments, addComment} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
-import { Button, Comment, Form, Header, Container } from 'semantic-ui-react'
-import BreadcrumbComponent from '../../Components/Breadcrumb/Breadcrumb';
+import { Button, Comment, Form, Header, Container, Breadcrumb } from 'semantic-ui-react';
+import topicRoutes from '../../utils/topicsRoutes';
+import {scrollToTopSmooth} from '../../utils/helperFunctions';
 
 export default function(props) {
 
@@ -15,12 +16,16 @@ export default function(props) {
    const users = useSelector(state => state.user.allPosts);
    const commentsObject = useSelector(state => state.post.comments);
    const dispatch = useDispatch();
+   const history = useHistory();
 
    const [editEnabled, setEditEnabled] = useState(false);
    const [commentContent, setCommentContent] = useState('');
 
    const postId = props.match.params.post;
    const topic = props.match.params.topic;
+   const topicName = topicRoutes.find(element => element.topicId === props.match.params.topic) ? topicRoutes.find(element => element.topicId === props.match.params.topic).name : 'Page Does Not Exist';
+
+   
 
    useEffect( () => {
       //If immediately created and redirected, fetchpost likely won't return anything because firebase still needs time to save, maybe add a set timeout or delay?
@@ -39,6 +44,10 @@ export default function(props) {
       console.log('mounted')
    }, [])
 
+   function handleNavigate(route) {
+      history.push(route)
+      scrollToTopSmooth();
+   }
 
 
    function getHtmlString() {
@@ -110,7 +119,13 @@ export default function(props) {
    //I need a posts collection and comment collection
    return (
       <div style={{width: '80vw', marginLeft: 'auto', marginRight: 'auto'}}>
-      <BreadcrumbComponent />
+            <Breadcrumb>
+               <Breadcrumb.Section link onClick={() => handleNavigate('/')}>Home</Breadcrumb.Section>
+               <Breadcrumb.Divider icon='right chevron' />
+               <Breadcrumb.Section link onClick={() => handleNavigate(`/forum/${topic}`)}>{topicName}</Breadcrumb.Section>
+               <Breadcrumb.Divider icon='right arrow' />
+               <Breadcrumb.Section active>Post</Breadcrumb.Section>
+            </Breadcrumb>
        <Container text>
         
          <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>

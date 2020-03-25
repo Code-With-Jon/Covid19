@@ -1,20 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react';
+import { Button, Icon, Image, Item, Label, Breadcrumb } from 'semantic-ui-react';
 import topicRoutes from '../../utils/topicsRoutes';
-import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
+import {scrollToTopSmooth} from '../../utils/helperFunctions';
+// import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 export default function(props) {
 
    const topic = props.match.params.topic;
+   const topicName = topicRoutes.find(element => element.topicId === props.match.params.topic) ? topicRoutes.find(element => element.topicId === props.match.params.topic).name : 'Page Does Not Exist';
 
    const postDocs = useSelector(state => state.post);
    const users = useSelector(state => state.user[topic]);
    const dispatch = useDispatch();
+   const history = useHistory();
 
 
    useEffect( () => {
@@ -57,17 +60,25 @@ export default function(props) {
       return
    }
 
+   function handleNavigate(route) {
+      history.push(route)
+      scrollToTopSmooth();
+   }
+
    //I need a posts collection and comment collection
    return (
       <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
-          <Breadcrumb />
-         <Link to={`${props.match.url}/create`} >
-         <Button  color="blue">Create Topic</Button>
-            
-         </Link>
+           <Breadcrumb>
+               <Breadcrumb.Section link onClick={() => handleNavigate('/')}>Home</Breadcrumb.Section>
+               <Breadcrumb.Divider icon='right chevron' />
+               <Breadcrumb.Section active>{topicName}</Breadcrumb.Section>
+            </Breadcrumb>
+            <Link to={`${props.match.url}/create`} >
+               <Button  color="blue">Create Topic</Button>
+            </Link>
          <h1>
 
-         {topicRoutes.find(element => element.topicId === props.match.params.topic).name}
+         {topicName}
          </h1>
          <Item.Group divided>
             {renderPosts()}
