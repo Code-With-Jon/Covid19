@@ -6,6 +6,7 @@ import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
 import { Button, Icon, Image, Item, Label } from 'semantic-ui-react';
 import topicRoutes from '../../utils/topicsRoutes';
+import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
 
 export default function(props) {
 
@@ -31,7 +32,7 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <Item key={index}>
-                  <Item.Image style={{height: '100px', width: '100px', borderRadius: '50px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
+                  <Item.Image style={{height: '100px', width: '100px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
                   <Item.Content>
                      <Item.Header as='a'>{doc.title}</Item.Header>
                      <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
@@ -59,6 +60,7 @@ export default function(props) {
    //I need a posts collection and comment collection
    return (
       <div style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
+          <Breadcrumb />
          <Link to={`${props.match.url}/create`} >
          <Button  color="blue">Create Topic</Button>
             

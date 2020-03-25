@@ -7,6 +7,7 @@ import draftToHtml from 'draftjs-to-html';
 import {Link} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
 import { Button, Comment, Form, Header, Container } from 'semantic-ui-react'
+import BreadcrumbComponent from '../../Components/Breadcrumb/Breadcrumb';
 
 export default function(props) {
 
@@ -108,7 +109,10 @@ export default function(props) {
 
    //I need a posts collection and comment collection
    return (
+      <div>
+      <BreadcrumbComponent />
        <Container text>
+        
          <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>
          <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{}}>
       
@@ -149,6 +153,7 @@ export default function(props) {
          </Comment.Group>
 
       </Container>
+      </div>
    )
 }
 
