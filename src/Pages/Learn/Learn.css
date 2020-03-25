@@ -1,0 +1,19 @@
+.learn-header-container {
+   display: flex;
+   flex-direction: row; 
+   align-items: center;
+   height: 275px;
+}
+
+.learn-header-text-container {
+   align-self: flex-end;
+   padding-left: 5vw;
+   flex: 1;
+}
+
+.learn-video {
+   height: 80%;
+   display: flex;
+   flex: 1;
+   justify-content: center;
+}

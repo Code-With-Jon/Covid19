@@ -1,21 +1,25 @@
 import React from 'react'
 import IframeComponent from '../../Components/Map';
+import './Learn.css';
 // import "node_modules/video-react/dist/video-react.css";
 
 export default function Learn(props) {
 return(
 <div id="learn" style={{backgroundColor: 'black', height: '70%'}}>
-    <div style={{display: 'flex', flexDirection: 'row'}}>
-        <div style={{paddingTop: '20vh', paddingLeft: '5vw', width: '50%'}}>
+    <div className="learn-header-container">
+        <div className="learn-header-text-container">
             <h1 style={{color: 'white', fontSize: 62}}>Learn About Covid 19</h1>
         </div>
+
+        <div className="learn-video">
             <IframeComponent src='https://www.youtube.com/embed/78jLBNSqc3g'
-                    frameBorder='0'
-                    allow='autoplay; encrypted-media'
-                    allowFullScreen
-                    title='video'
-                    height="100%"
+                frameBorder='0'
+                allow='autoplay; encrypted-media'
+                allowFullScreen
+                title='video'
+                height="100%"
             />
+        </div>
     </div>
 
     <div style={{backgroundColor: 'white', height: '20%', width: '100%', paddingBottom: '2vh'}}>
