@@ -31,7 +31,7 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <Item key={index}>
-                  <Item.Image src='/images/wireframe/image.png' />
+                  <Item.Image src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
                   <Item.Content>
                      <Item.Header as='a'>{doc.title}</Item.Header>
                      <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
