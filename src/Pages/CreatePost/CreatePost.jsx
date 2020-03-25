@@ -4,7 +4,7 @@ import {addPost} from '../../redux/actions/postActions';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
+import { Button, Form } from 'semantic-ui-react'
 
 export default function CreatePost(props) {
    const dispatch = useDispatch();
@@ -72,9 +72,18 @@ export default function CreatePost(props) {
   };
 
    return (
-      <div>
-         <button onClick={() => createPost()}>Save</button>
-         <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+      <div style={{width: '80vw', marginRight: 'auto', marginLeft: 'auto'}}>
+         <h1>
+            Create Topic
+         </h1>
+         <Form unstackable>
+    <Form.Group widths={2}>
+      <Form.Input label='Topic Title' placeholder='Topic Title' name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+    </Form.Group>
+    
+    </Form>
+         {/* <button >Save</button>
+         <input type="text" /> */}
          <Editor
             placeholder="Type your Post!"
             editorState={editorState}
@@ -102,7 +111,7 @@ export default function CreatePost(props) {
                 },
             }}
          />
-
+<Button type='submit' floated='right' onClick={() => createPost()}>Save</Button>
 
       </div>
    )
