@@ -21,7 +21,8 @@ import {
  } from 'semantic-ui-react'
  import 'semantic-ui-css/semantic.min.css'
  import AdSense from 'react-adsense';
-
+ import DefaultAvatar from '../../avatar-default.jpg'
+ 
 export default function Topics(props) {
 
    const counter = useSelector(state => state.post.counter);
@@ -80,7 +81,7 @@ export default function Topics(props) {
   <Grid.Column verticalAlign='middle'>
   <Segment basic textAlign='center'>
      <div style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between'}}>
-        <div>
+        <div style={{width: '48%'}}>
      <h4>Posts</h4>
          <p>{counter[topic.topicId] ? counter[topic.topicId].count : 0}</p>
      </div>
@@ -89,13 +90,13 @@ export default function Topics(props) {
 
       <Divider horizontal>-</Divider>
       <div style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between'}}>
-        <div>
+        <div style={{width: '48%'}}>
       <h4>Lastest Topic</h4>
       <p>{counter[topic.topicId] ? counter[topic.topicId].latestPost.title : "No Posts Yet"}</p>
       </div>
-      <div>
+      <div style={{width: '48%'}}>
      <h4>User</h4>
-     <img src={counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : null} alt="avatar" style={{height: 30, width: 30}}/>
+     <img src={counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : DefaultAvatar} alt="avatar" style={{height: 30, width: 30}}/>
      </div>
      </div>
    </Segment>   
