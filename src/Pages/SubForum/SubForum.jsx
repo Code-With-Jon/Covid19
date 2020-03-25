@@ -30,33 +30,26 @@ export default function(props) {
         
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
-               <div key={index} >
-                  <Item.Group>
-                  <Item>
-      <Item.Image src='/images/wireframe/image.png' />
-
-      <Item.Content>
-        <Item.Header as='a'>{doc.title}</Item.Header>
-        <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
-        <Item.Meta>
-          <span className='cinema'>IFC</span>
-        </Item.Meta>
-        {/* <Item.Description>{paragraph}</Item.Description> */}
-        <Item.Extra>
-        <Link to={`${props.match.url}/${doc.id}`}>
-          <Button primary floated='right'>
-            View
-            <Icon name='right chevron' />
-          </Button>
-          </Link>
-        </Item.Extra>
-      </Item.Content>
-    </Item>
-    </Item.Group>       
-                
-             
+               <Item key={index}>
+                  <Item.Image src='/images/wireframe/image.png' />
+                  <Item.Content>
+                     <Item.Header as='a'>{doc.title}</Item.Header>
+                     <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
+                     <Item.Meta>
+                        <span className='cinema'>IFC</span>
+                     </Item.Meta>
+                     {/* <Item.Description>{paragraph}</Item.Description> */}
+                     <Item.Extra>
+                        <Link to={`${props.match.url}/${doc.id}`}>
+                           <Button primary floated='right'>
+                              View
+                              <Icon name='right chevron' />
+                           </Button>
+                        </Link>
+                     </Item.Extra>
+                  </Item.Content>
+               </Item>    
                
-               </div>
             )
          } )
       }
@@ -74,9 +67,9 @@ export default function(props) {
 
          {topicRoutes.find(element => element.topicId === props.match.params.topic).name}
          </h1>
-         
-         {renderPosts()}
-      
+         <Item.Group divided>
+            {renderPosts()}
+         </Item.Group>   
       </div>
    )
 }
