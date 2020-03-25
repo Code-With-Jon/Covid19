@@ -4,7 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
-import { Button, Icon, Image, Item, Label } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label } from 'semantic-ui-react';
+import topicRoutes from '../../utils/topicsRoutes';
 
 export default function(props) {
 
@@ -29,33 +30,26 @@ export default function(props) {
         
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
-               <div key={index} >
-                  <Item.Group divided>
-                  <Item>
-      <Item.Image src='/images/wireframe/image.png' />
-
-      <Item.Content>
-        <Item.Header as='a'>{doc.title}</Item.Header>
-        <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
-        <Item.Meta>
-          <span className='cinema'>IFC</span>
-        </Item.Meta>
-        {/* <Item.Description>{paragraph}</Item.Description> */}
-        <Item.Extra>
-        <Link to={`${props.match.url}/${doc.id}`}>
-          <Button primary floated='right'>
-            View
-            <Icon name='right chevron' />
-          </Button>
-          </Link>
-        </Item.Extra>
-      </Item.Content>
-    </Item>
-    </Item.Group>       
-                
-             
+               <Item key={index}>
+                  <Item.Image src='/images/wireframe/image.png' />
+                  <Item.Content>
+                     <Item.Header as='a'>{doc.title}</Item.Header>
+                     <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
+                     <Item.Meta>
+                        <span className='cinema'>IFC</span>
+                     </Item.Meta>
+                     {/* <Item.Description>{paragraph}</Item.Description> */}
+                     <Item.Extra>
+                        <Link to={`${props.match.url}/${doc.id}`}>
+                           <Button primary floated='right'>
+                              View
+                              <Icon name='right chevron' />
+                           </Button>
+                        </Link>
+                     </Item.Extra>
+                  </Item.Content>
+               </Item>    
                
-               </div>
             )
          } )
       }
@@ -71,11 +65,11 @@ export default function(props) {
          </Link>
          <h1>
 
-         {props.match.params.topic}
+         {topicRoutes.find(element => element.topicId === props.match.params.topic).name}
          </h1>
-         
-         {renderPosts()}
-      
+         <Item.Group divided>
+            {renderPosts()}
+         </Item.Group>   
       </div>
    )
 }
