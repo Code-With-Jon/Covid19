@@ -3,13 +3,15 @@ import {useSelector, useDispatch} from 'react-redux';
 import {signInGmail, signOut} from '../../redux/actions/authActions';
 import Logo from '../../TalkCovidLogo.png'
 import DefaultAvatar from '../../avatar-default.jpg'
-import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
+import {Link, useHistory} from 'react-router-dom';
+import {scrollToTopSmooth} from '../../utils/helperFunctions';
 
 export default function NavBar(props) {
 
    const dispatch = useDispatch();
    const avatar = useSelector(state => state.firebase.profile.avatarUrl)
+   const history = useHistory();
 
    function loginWithGoogle() {
       dispatch(signInGmail())
@@ -19,6 +21,10 @@ export default function NavBar(props) {
        dispatch(signOut())
       }
 
+      function handleNavigate(route) {
+         history.push(route)
+         scrollToTopSmooth();
+      }
 
      const handleScrollTo = (elRef) => {
          // Incase the ref supplied isn't ref.current
@@ -44,7 +50,7 @@ export default function NavBar(props) {
             <div style={{width: '77vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <nav>
           <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
-            <li onClick={() => { this.handleScrollTo(this.refA) }}>
+            <li onClick={() => handleNavigate('/')}>
               HOME
             </li>
             <li style={{paddingLeft: '2vw', paddingRight: '2vw'}} onClick={() => { this.handleScrollTo(this.refB) }}>
