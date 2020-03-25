@@ -22,6 +22,8 @@ export default function(props) {
 
 
 
+
+
    function renderPosts() {
       if (postDocs[topic] && postDocs[topic].docsArray.length >= 1) {
          return postDocs[topic].docsArray.map( (doc, index) => {
@@ -29,7 +31,7 @@ export default function(props) {
                <div key={index}>
                   <Link to={`${props.match.url}/${doc.id}`}>
                      <p>{doc.title}</p>
-                     <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
+                     <p>Author: {users[doc.postOwner] && users[doc.postOwner].displayName}</p>
                   </Link>
                </div>
             )
