@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {addPost} from '../../redux/actions/postActions';
+import {signInGmail} from '../../redux/actions/authActions';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -13,10 +14,14 @@ export default function CreatePost(props) {
    const [title, setTitle] = useState('');
    const [editing, setEditing] = useState(true);
    // const [pictures, setPictures] = useState([]);
+   const uid = useSelector(state => state.firebase.auth.uid);
 
    //testing states
    const [uploadedImages, setUploadedImages] = useState([])
 
+   function loginWithGoogle() {
+      dispatch(signInGmail());
+    }
 
    async function createPost() {
       if (!editing) {
@@ -111,7 +116,12 @@ export default function CreatePost(props) {
                 },
             }}
          />
-<Button type='submit' style={{float: 'right'}} positive onClick={() => createPost()}>Save</Button>
+
+         {uid ? 
+            <Button type='submit' style={{float: 'right'}} positive onClick={() => createPost()}>Save</Button>
+            :
+            <Button type='submit' style={{float: 'right'}} positive onClick={() => loginWithGoogle()}>Log In</Button>
+         }
 
       </div>
    )

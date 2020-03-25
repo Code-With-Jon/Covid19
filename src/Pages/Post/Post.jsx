@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import _ from 'lodash';
 import {useSelector, useDispatch} from 'react-redux';
+import {signInGmail} from '../../redux/actions/authActions';
 import {fetchPost, fetchComments, addComment} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
@@ -15,6 +16,7 @@ export default function(props) {
    const postDocs = useSelector(state => state.post.docs);
    const users = useSelector(state => state.user.allPosts);
    const commentsObject = useSelector(state => state.post.comments);
+   const uid = useSelector(state => state.firebase.auth.uid);
    const dispatch = useDispatch();
    const history = useHistory();
 
@@ -43,6 +45,10 @@ export default function(props) {
       dispatch(fetchUsers({field: 'activePosts', value: postId}))
       console.log('mounted')
    }, [])
+
+   function loginWithGoogle() {
+      dispatch(signInGmail());
+    }
 
    function handleNavigate(route) {
       history.push(route)
@@ -133,26 +139,31 @@ export default function(props) {
       
          </div>
          <p>Author: {returnUser() && returnUser().displayName}</p>
-
-         {editEnabled ?
-         <div>
-            <Form reply >
-             <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
-             <div style={{marginLeft: '26vw'}}>
-             <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
-             <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
-             </div>
-             {/* <button  >Post</button>
-            <button  >Cancel</button> */}
-            </Form>
-            {/* <input type="text" /> */}
+         {uid ? 
+         (editEnabled ?
+            <div>
+               <Form reply >
+                <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+                <div style={{marginLeft: '26vw'}}>
+                <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
+                <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+                </div>
+                {/* <button  >Post</button>
+               <button  >Cancel</button> */}
+               </Form>
+               {/* <input type="text" /> */}
+              
+            </div>
            
-         </div>
-        
+            :
+            <div style={{marginLeft: '28vw'}}>
+                <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+               {/* <button  >Reply</button> */}
+            </div>
+         )
          :
          <div style={{marginLeft: '28vw'}}>
-             <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
-            {/* <button  >Reply</button> */}
+            <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => loginWithGoogle()}/>
          </div>
          }
 
