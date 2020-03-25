@@ -1,4 +1,5 @@
 import React from 'react'
+import './YoutubeList.css';
 import _ from 'lodash';
 
 import ReactDOM from 'react-dom';
@@ -46,10 +47,10 @@ export default class YoutubeList extends React.Component {
       }, 300);
   
       return (
-        <div style={{marginTop: '50px'}}>
+        <div className="youtube">
           <h3 style={{marginLeft: '30vw'}}>Youtube Search:</h3>
           <SearchBar onSearchTermChange={videoSearch} />
-          <div style={{marginTop: '50px'}}>
+          <div className="youtube-videoBox">
             <VideoDetail video={this.state.selectedVideo} />
             <VideoList
               onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
