@@ -94,6 +94,7 @@ export default function Topics(props) {
       <p>{counter[topic.topicId] ? counter[topic.topicId].latestPost.title : "No Posts Yet"}</p>
       </div>
       <div>
+         {/* FOR JON: counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : null */}
      <h4>User</h4>
      </div>
      </div>
