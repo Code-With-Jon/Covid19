@@ -111,7 +111,7 @@ export default function CreatePost(props) {
                 },
             }}
          />
-<Button type='submit' floated='right' onClick={() => createPost()}>Save</Button>
+<Button type='submit' style={{float: 'right'}} positive onClick={() => createPost()}>Save</Button>
 
       </div>
    )
