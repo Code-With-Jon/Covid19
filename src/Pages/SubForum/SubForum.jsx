@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
+import {signInGmail} from '../../redux/actions/authActions';
 import {fetchTopicPosts} from '../../redux/actions/postActions';
 import {fetchUsers} from '../../redux/actions/userActions';
 import draftToHtml from 'draftjs-to-html';
@@ -16,8 +17,13 @@ export default function(props) {
 
    const postDocs = useSelector(state => state.post);
    const users = useSelector(state => state.user[topic]);
+   const uid = useSelector(state => state.firebase.auth.uid);
    const dispatch = useDispatch();
    const history = useHistory();
+
+   function loginWithGoogle() {
+      dispatch(signInGmail());
+    }
 
 
    useEffect( () => {
@@ -37,7 +43,7 @@ export default function(props) {
                <Item key={index}>
                   <Item.Image style={{height: '100px', width: '100px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
                   <Item.Content>
-                     <Item.Header as='a'>{doc.title}</Item.Header>
+                     <Item.Header as='div'>{doc.title}</Item.Header>
                      <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
                      <Item.Meta>
                         {/* <span className='cinema'>IFC</span> */}
@@ -73,9 +79,13 @@ export default function(props) {
                <Breadcrumb.Divider icon='right chevron' />
                <Breadcrumb.Section active>{topicName}</Breadcrumb.Section>
             </Breadcrumb>
+            {uid ? 
             <Link to={`${props.match.url}/create`} >
                <Button  color="blue">Create Topic</Button>
             </Link>
+            :
+            <Button onClick={() => loginWithGoogle()} color="blue">Create Topic</Button>
+            }
          <h1>
 
          {topicName}

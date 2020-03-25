@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {signInGmail} from '../../redux/actions/authActions';
 import {addComment} from '../../redux/actions/postActions';
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
@@ -9,8 +10,13 @@ export default function Comments(props) {
    const [commentContent, setCommentContent] = useState('');
 
    const users = useSelector(state => state.user.allPosts);
+   const uid = useSelector(state => state.firebase.auth.uid);
 
    const dispatch = useDispatch();
+
+   function loginWithGoogle() {
+      dispatch(signInGmail());
+    }
 
    function saveComment() {
       let data = {
@@ -49,17 +55,22 @@ export default function Comments(props) {
             </Comment.Metadata>
             <Comment.Text>{props.comment.content}</Comment.Text>
             <Comment.Actions>
-               {editEnabled ?
-               <> 
-                  <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
-                  <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
-                  <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
-               </>
+               {uid ? 
+               ((editEnabled) ?
+                  <> 
+                     <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
+                     <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
+                     <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
+                  </>
+                  :
+                  <>
+                     <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
+                  </>
+               )
                :
-               <>
-                  <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
-               </>
+               <Comment.Action onClick={() => loginWithGoogle()}>Reply</Comment.Action>
                }
+
             </Comment.Actions>
          </Comment.Content>
         
