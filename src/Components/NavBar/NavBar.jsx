@@ -5,6 +5,7 @@ import Logo from '../../TalkCovidLogo.png'
 import DefaultAvatar from '../../avatar-default.jpg'
 import { Button } from 'semantic-ui-react'
 import {Link, useHistory} from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
 
 export default function NavBar(props) {
@@ -21,21 +22,14 @@ export default function NavBar(props) {
        dispatch(signOut())
       }
 
-      function handleNavigate(route) {
-         history.push(route)
-         scrollToTopSmooth();
-      }
 
-     const handleScrollTo = (elRef) => {
-         // Incase the ref supplied isn't ref.current
-         const el = elRef.current ? elRef.current : elRef
-         
-         // Scroll the element into view
-         el.scrollIntoView({
-           behavior: 'smooth',
-           block: 'start'
-         })
-       }
+
+    function scrollToElement(el) {
+      const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: yCoordinate, behavior: 'smooth' }); 
+    }
+
+    
 
 
    return (
@@ -50,13 +44,13 @@ export default function NavBar(props) {
             <div style={{width: '77vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
             <nav>
           <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
-            <li onClick={() => handleNavigate('/')}>
-              HOME
+            <li>
+              <Link to="/" onClick={() => scrollToTopSmooth()}>HOME</Link>
             </li>
-            <li style={{paddingLeft: '2vw', paddingRight: '2vw'}} onClick={() => { this.handleScrollTo(this.refB) }}>
-              METRICS
+            <li style={{paddingLeft: '2vw', paddingRight: '2vw'}} >
+              <HashLink to="/#metrics" smooth scroll={scrollToElement}>METRICS</HashLink>
             </li>
-            <li onClick={() => { this.handleScrollTo(this.refC) }}>
+            <li>
               LEARN
             </li>
           </ul>
