@@ -94,9 +94,8 @@ export default function Topics(props) {
       <p>{counter[topic.topicId] ? counter[topic.topicId].latestPost.title : "No Posts Yet"}</p>
       </div>
       <div>
-         {/* FOR JON: counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : null */}
      <h4>User</h4>
-     {/* <img src={} */}
+     <img src={counter[topic.topicId] ? counter[topic.topicId].latestPost.avatarUrl : null} alt="avatar" style={{height: 30, width: 30}}/>
      </div>
      </div>
    </Segment>   
