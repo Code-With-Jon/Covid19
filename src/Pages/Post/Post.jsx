@@ -23,15 +23,16 @@ export default function(props) {
 
    useEffect( () => {
       //If immediately created and redirected, fetchpost likely won't return anything because firebase still needs time to save, maybe add a set timeout or delay?
-      async function asyncFetchPost() {
-         const res = await dispatch(fetchPost(postId));
-         if (!res.id) {
-            setTimeout( () => {
-               dispatch(fetchPost(postId))
-            }, 1000);
-         }
-      }
-      asyncFetchPost();
+      // async function asyncFetchPost() {
+      //    const res = await dispatch(fetchPost(postId));
+      //    if (!res.id) {
+      //       setTimeout( () => {
+      //          dispatch(fetchPost(postId))
+      //       }, 1000);
+      //    }
+      // }
+      // asyncFetchPost();
+      dispatch(fetchPost(postId))
       dispatch(fetchComments(postId));
       dispatch(fetchUsers({field: 'activePosts', value: postId}))
       console.log('mounted')
