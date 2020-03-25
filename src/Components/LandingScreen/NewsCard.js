@@ -13,7 +13,7 @@ export default function NewsCard() {
 
  const getNews = async () => {
 
-    var url = 'http://newsapi.org/v2/top-headlines?' +
+    var url = 'https://newsapi.org/v2/top-headlines?' +
           `q=${'corona' || 'covid'}&` +
           'from=2020-03-20&' +
           'sortBy=popularity&' +
