@@ -6,7 +6,7 @@ export default function Learn(props) {
 return(
 <div id="learn" style={{backgroundColor: 'black', height: '70%'}}>
     <div style={{display: 'flex', flexDirection: 'row'}}>
-        <div style={{paddingTop: '20vh', paddingLeft: '5vw'}}>
+        <div style={{paddingTop: '20vh', paddingLeft: '5vw', width: '50%'}}>
             <h1 style={{color: 'white', fontSize: 62}}>Learn About Covid 19</h1>
         </div>
             <IframeComponent src='https://www.youtube.com/embed/78jLBNSqc3g'
@@ -15,7 +15,6 @@ return(
                     allowFullScreen
                     title='video'
                     height="100%"
-                   
             />
     </div>
 
