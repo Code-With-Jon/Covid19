@@ -13,7 +13,7 @@ return(
 
         <div className="learn-video">
             <IframeComponent src='https://www.youtube.com/embed/78jLBNSqc3g'
-                frameBorder='0'
+                // frameBorder='0'
                 allow='autoplay; encrypted-media'
                 allowFullScreen
                 title='video'
