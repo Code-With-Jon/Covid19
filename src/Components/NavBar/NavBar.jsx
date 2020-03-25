@@ -51,7 +51,7 @@ export default function NavBar(props) {
               <HashLink to="/#metrics" smooth scroll={scrollToElement}>METRICS</HashLink>
             </li>
             <li>
-              LEARN
+            <HashLink to="/learn/#learn" smooth scroll={scrollToElement}>LEARN</HashLink>
             </li>
           </ul>
         </nav>

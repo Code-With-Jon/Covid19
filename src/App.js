@@ -7,6 +7,7 @@ import GeneralTopic from './Pages/general'
 import SubForum from './Pages/SubForum/SubForum';
 import CreatePost from './Pages/CreatePost/CreatePost';
 import Post from './Pages/Post/Post';
+import Learn from './Pages/Learn/Learn'
 import Footer from './Components/Footer/FooterComponent'
 //REDUX IMPORTS
 import { Provider } from 'react-redux';
@@ -40,6 +41,7 @@ function App() {
             <Route path="/forum/:topic" exact component={SubForum}/>
             <Route path="/forum/:topic/create" exact component={CreatePost}/>
             <Route path="/forum/:topic/:post" exact component={Post}/>
+            <Route path="/learn" exact component={Learn}/>
           </Switch>
           <Footer />
         </Router>
