@@ -19,7 +19,7 @@ return(
     </div>
 
     <div style={{backgroundColor: 'white', height: '20%', width: '100%', paddingBottom: '2vh'}}>
-        <h1 style={{textAlign: "center"}}>About</h1>
+       
         
         {about.map((item, index) => {
             return (
