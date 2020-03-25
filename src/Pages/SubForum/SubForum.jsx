@@ -11,6 +11,7 @@ export default function(props) {
    const topic = props.match.params.topic;
 
    const postDocs = useSelector(state => state.post);
+   const users = useSelector(state => state.user[topic]);
    const dispatch = useDispatch();
 
 
@@ -35,6 +36,7 @@ export default function(props) {
 
       <Item.Content>
         <Item.Header as='a'>{doc.title}</Item.Header>
+        <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>
         <Item.Meta>
           <span className='cinema'>IFC</span>
         </Item.Meta>
@@ -51,6 +53,8 @@ export default function(props) {
     </Item>
     </Item.Group>       
                 
+             
+               
                </div>
             )
          } )

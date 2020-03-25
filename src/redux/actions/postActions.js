@@ -29,16 +29,48 @@ export const addPost = (data) => {
             },
          }, {merge: true})
 
-         //Update user profile reference to post and topic.
 
          return firestore.collection('posts').add({
             ...uploadData,
             createdAt: firestore.FieldValue.serverTimestamp(),
          }).then(docRef => {
+            //Update user profile reference to post and topic.
             firestore.collection('users').doc(uid).set({
                activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
                activePosts: firestore.FieldValue.arrayUnion(docRef.id)
             }, {merge: true});
+
+
+            //add Profile to users state so refetch is not needed.
+            const usersObject = {};
+            const profile = getState().firebase.profile;
+            usersObject.allPosts = {...getState().user.allPosts};
+            usersObject.allPosts[data.postId] = {
+               avatarUrl: profile.avatarUrl,
+               displayName: profile.displayName,
+               email: profile.email,
+            } 
+            dispatch({
+               type: "FETCH_USERS", payload: usersObject
+            })
+
+
+            //add Post to post state so refetch is not needed.
+            const postDocs = getState().post.docs;
+            dispatch({
+               type: "FETCH_POST", payload: {
+                  ...postDocs,
+                  [docRef.id]: {
+                     ...uploadData,
+                     createdAt: {
+                        seconds: Math.floor(new Date().getTime() / 1000)
+                     },
+                  }
+               }
+            })
+
+
+
             dispatch({type: "POSTADD_SUCCESS"})
             return docRef.id
          }).catch(err => {
@@ -77,13 +109,13 @@ export const addComment = (data) => {
             commentCount: firestore.FieldValue.increment(1),
             participants: firestore.FieldValue.arrayUnion(uid),
          }, {merge: true})
-
          await firestore.collection('users').doc(uid).set({
             // activeTopicsOP: firestore.FieldValue.arrayUnion(data.topic),
             activePosts: firestore.FieldValue.arrayUnion(data.postId)
          }, {merge: true});
 
 
+         //Add comment to database
          return firestore.collection('posts').doc(data.postId).collection('comments')
          .add({
             ...uploadData,
@@ -120,6 +152,19 @@ export const addComment = (data) => {
                type: "FETCH_POST", payload: {
                   ...postDocs,
                }
+            })
+
+            //So that the person can get the updated user instead of refetching.
+            const usersObject = {};
+            const profile = getState().firebase.profile;
+            usersObject.allPosts = {...getState().user.allPosts};
+            usersObject.allPosts[data.postId] = {
+               avatarUrl: profile.avatarUrl,
+               displayName: profile.displayName,
+               email: profile.email,
+            } 
+            dispatch({
+               type: "FETCH_USERS", payload: usersObject
             })
    
    
@@ -178,15 +223,16 @@ export const fetchPost = (id) => {
       return firestore.get({ collection: 'posts', doc: id })
          .then((doc) => {
             // console.log(doc.data());
-
-            dispatch({
-               type: "FETCH_POST", payload: {
-                  ...postDocs,
-                  [id]: {
-                     ...doc.data()
+            if(doc.exists) {
+               dispatch({
+                  type: "FETCH_POST", payload: {
+                     ...postDocs,
+                     [id]: {
+                        ...doc.data()
+                     }
                   }
-               }
-            })
+               })
+            }
             return doc;
          }).catch((err) => {
             return err;

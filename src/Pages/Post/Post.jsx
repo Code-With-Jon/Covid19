@@ -11,6 +11,7 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react'
 export default function(props) {
 
    const postDocs = useSelector(state => state.post.docs);
+   const users = useSelector(state => state.user.allPosts);
    const commentsObject = useSelector(state => state.post.comments);
    const dispatch = useDispatch();
 
@@ -22,15 +23,16 @@ export default function(props) {
 
    useEffect( () => {
       //If immediately created and redirected, fetchpost likely won't return anything because firebase still needs time to save, maybe add a set timeout or delay?
-      async function asyncFetchPost() {
-         const res = await dispatch(fetchPost(postId));
-         if (!res.id) {
-            setTimeout( () => {
-               dispatch(fetchPost(postId))
-            }, 1000);
-         }
-      }
-      asyncFetchPost();
+      // async function asyncFetchPost() {
+      //    const res = await dispatch(fetchPost(postId));
+      //    if (!res.id) {
+      //       setTimeout( () => {
+      //          dispatch(fetchPost(postId))
+      //       }, 1000);
+      //    }
+      // }
+      // asyncFetchPost();
+      dispatch(fetchPost(postId))
       dispatch(fetchComments(postId));
       dispatch(fetchUsers({field: 'activePosts', value: postId}))
       console.log('mounted')
@@ -97,14 +99,21 @@ export default function(props) {
       setEditEnabled(!editEnabled)
    }
    
+   function returnUser() {
+      if (postDocs[postId] && users[postDocs[postId].postOwner]) {
+         return users[postDocs[postId].postOwner];
+      }
+      else return null
+   }
 
    //I need a posts collection and comment collection
    return (
       <div>
-
+         <h3>{postDocs[postId] && postDocs[postId].title}</h3>
          <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{border: '1px solid black'}}>
       
          </div>
+         <p>Author: {returnUser() && returnUser().displayName}</p>
 
          {editEnabled ?
          <div>
