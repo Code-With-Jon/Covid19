@@ -3,12 +3,14 @@
    flex-direction: row; 
    align-items: center;
    height: 350px;
+   padding-left: 5vw;
+   padding-right: 5vw;
 }
 
 .learn-header-text-container {
    align-self: flex-end;
-   padding-left: 5vw;
    flex: 1;
+   padding-bottom: 20px;
 }
 
 .learn-video {
