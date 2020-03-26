@@ -2,6 +2,12 @@
    margin-top: 50px;
 }
 
-.youtube-videoBox {
+.youtube-text{
+   margin-left: 31vw;
 }
 
+@media (max-width: 576px) {
+   .youtube-text{
+      margin-left: 40vw;
+   }
+}
