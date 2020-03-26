@@ -11,6 +11,17 @@ import NewsCard from '../../Components/LandingScreen/NewsCard';
 export default function Landing() {
     const dispatch = useDispatch();
     const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
+
+  useEffect(() => {
+    window.addEventListener('resize', () => handleResize());
+    return  () => {
+        window.removeEventListener('resize', () => handleResize());
+    }
+  }, [])
+
+  function handleResize() {
+    setMobileScreen(window.innerWidth <= 576)
+  }
     useEffect( () => {
         dispatch(fetchCounter());
     }, [])
@@ -26,7 +37,7 @@ return(
         <IframeComponent src="https://www.arcgis.com/apps/Embed/index.html?webmap=14aa9e5660cf42b5b4b546dec6ceec7c" height="100%" width="100%"/>
         </div>  */}
 
-    <h2 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '0vh', color: 'white', background: 'rgba(0,0,0,.87)', width: !mobileScreen ? '20vw' : '40vw'}}>Latest News</h2>
+    <h2 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '0vh', color: 'white', background: 'rgba(0,0,0,.87)', width: !mobileScreen ? '20vw' : '52vw'}}>Latest News</h2>
      {/* <div id='news-articles' style={{display: 'flex', overflow: 'scroll', height: '100%'}}> */}
 
    <NewsCard />
