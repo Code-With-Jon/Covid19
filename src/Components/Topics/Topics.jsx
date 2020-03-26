@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import './Topics.css';
 import {Link} from 'react-router-dom';
@@ -26,10 +26,10 @@ import {
 export default function Topics(props) {
 
    const counter = useSelector(state => state.post.counter);
-
+   const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
    return (
       <div>
-         <h1 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '2vh', color: 'white', background: 'rgba(0,0,0,.87)', width: '20vw'}}>Discussion Board</h1>
+         <h1 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '2vh', color: 'white', background: 'rgba(0,0,0,.87)', width: !mobileScreen ? '20vw' : '52vw'}}>Discussion Board</h1>
          <div style={{display: 'flex', flexDirection: 'row'}}>
          
             <div style={{flexDirection: 'column', flexWrap: 'no-wrap', width: '10vw'}}>
