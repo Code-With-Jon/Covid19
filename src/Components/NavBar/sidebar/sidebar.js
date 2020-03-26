@@ -12,6 +12,13 @@ export default props => {
     window.scrollTo({ top: yCoordinate, behavior: 'smooth' }); 
   }
 
+  function handleLogIn(){
+    props.login()
+  }
+  function handleLogOut(){
+    props.logout()
+  }
+
   return (
     // Pass on our props
     <Menu {...props}>
@@ -26,7 +33,15 @@ export default props => {
       <HashLink className="menu-item" to="/learn/#learn" smooth scroll={scrollToElement}>
         LEARN
         </HashLink>
-    
+    {!props.avatar ?
+      <HashLink className="menu-item" onClick={() => handleLogIn()} smooth scroll={scrollToElement}>
+        LOG IN
+        </HashLink>
+      :
+      <HashLink className="menu-item" onClick={() => handleLogOut()} smooth scroll={scrollToElement}>
+        LOG OUT
+        </HashLink>
+}
     </Menu>
   );
 };

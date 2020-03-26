@@ -50,7 +50,7 @@ export default function NavBar(props) {
       <div>
          <div className='menu'>
          {mobileScreen && 
-          <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+          <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} login={loginWithGoogle} logout={handleSignOut} avatar={avatar}/>
         }
             <Link to='/'>
             <div style={{display: 'flex', flexDirection: 'row', marginLeft: '5vw'}}>
@@ -83,9 +83,21 @@ export default function NavBar(props) {
                            )
                      }  
                      {!avatar ? 
+                        !mobileScreen ?
                           <Button style={{marginRight: mobileScreen ? "28%" : ''}} secondary onClick={() => loginWithGoogle()}>Google Signin</Button>
+                          :
+                          (
+                          <>
+                          </>
+                          )
                         :
+                        !mobileScreen ?
                         <Button style={{marginRight: mobileScreen ? "28%" : ''}} secondary onClick={() => handleSignOut()}>Signout</Button>
+                        : 
+                        (
+                           <>
+                           </>
+                        )
                         }
             </div>
          </div>
