@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {signInGmail} from '../../redux/actions/authActions';
 import {addComment} from '../../redux/actions/postActions';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
+import {convertTimeToString} from '../../utils/helperFunctions';
 import './Comment.css';
 
 export default function Comments(props) {
@@ -19,7 +20,8 @@ export default function Comments(props) {
       dispatch(signInGmail());
     }
 
-   function saveComment() {
+   function saveComment(e) {
+      e.preventDefault();
       let data = {
          topic: props.comment.topic,
          postId: props.comment.postId,
@@ -52,7 +54,7 @@ export default function Comments(props) {
          <Comment.Content>
             <Comment.Author as='a'>{users[props.comment.commentOwner] && users[props.comment.commentOwner].displayName}</Comment.Author>
             <Comment.Metadata>
-               <div>Today at 5:42PM</div>
+               <div>{convertTimeToString(props.comment.createdAt.seconds * 1000)}</div>
             </Comment.Metadata>
             <Comment.Text>
                <div className="comment-text-content">{props.comment.content}</div>
@@ -61,12 +63,12 @@ export default function Comments(props) {
                {uid ? 
                ((editEnabled) ?
                   <> 
-                     <Form reply >
-                        <textarea rows={3} style={{width: '100%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+                     <Form onSubmit={saveComment} reply >
+                        <textarea rows={3} required={true} style={{width: '100%', height: 'auto'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}></textarea>
+                        <button type="submit" className='comment-post'>Post</button> 
+                        <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
                      </Form>  
                      {/* <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/> */}
-                     <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
-                     <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
                   </>
                   :
                   <>

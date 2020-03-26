@@ -9,7 +9,7 @@ import {Link, useHistory} from 'react-router-dom';
 import Comments from '../../Components/Comment/Comment';
 import { Button, Comment, Form, Header, Container, Breadcrumb } from 'semantic-ui-react';
 import topicRoutes from '../../utils/topicsRoutes';
-import {scrollToTopSmooth} from '../../utils/helperFunctions';
+import {scrollToTopSmooth, convertTimeToString} from '../../utils/helperFunctions';
 
 import './Post.css';
 
@@ -97,7 +97,8 @@ export default function(props) {
 
 
 
-   function saveComment() {
+   function saveComment(e) {
+      e.preventDefault();
       let data = {
          topic,
          postId,
@@ -134,12 +135,13 @@ export default function(props) {
                </div>
 
                <p>Author: {returnUser() && returnUser().displayName}</p>
+               <p>{postDocs[postId] && convertTimeToString(postDocs[postId].createdAt.seconds * 1000)}</p>
                {uid ? 
                (editEnabled ?
-                  <Form reply >
-                     <Form.TextArea style={{width: '100%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+                  <Form reply onSubmit={saveComment} >
+                     <textarea rows='5' style={{width: '100%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} required={true} ></textarea>
                      <div className="post-content-button-container1">
-                        <Button content='Post' labelPosition='left' icon='check circle outline' primary onClick={() => saveComment()}/>
+                        <Button type="submit" content='Post' labelPosition='left' icon='check circle outline' primary />
                         <Button content='Cancel' labelPosition='left' icon='times circle outline' primary onClick={() => setEditEnabled(!editEnabled)}/>
                      </div>
                   </Form>  
