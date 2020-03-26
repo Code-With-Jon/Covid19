@@ -134,8 +134,10 @@ export default function(props) {
                <div className="post-content-text" dangerouslySetInnerHTML={{__html: getHtmlString()}}>
                </div>
 
-               <p>Author: {returnUser() && returnUser().displayName}</p>
-               <p>{postDocs[postId] && convertTimeToString(postDocs[postId].createdAt.seconds * 1000)}</p>
+               <div className="post-content-info">
+                  <div>Author: {returnUser() && returnUser().displayName}</div>
+                  <div>{postDocs[postId] && convertTimeToString(postDocs[postId].createdAt.seconds * 1000)}</div>
+               </div>
                {uid ? 
                (editEnabled ?
                   <Form reply onSubmit={saveComment} >

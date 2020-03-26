@@ -24,3 +24,8 @@ a:visited {
 a:hover {
   color: inherit;
 }
+
+p {
+  padding: none;
+  margin: none;
+}
