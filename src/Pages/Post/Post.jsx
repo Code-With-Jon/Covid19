@@ -11,6 +11,8 @@ import { Button, Comment, Form, Header, Container, Breadcrumb } from 'semantic-u
 import topicRoutes from '../../utils/topicsRoutes';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
 
+import './Post.css';
+
 export default function(props) {
 
    const postDocs = useSelector(state => state.post.docs);
@@ -124,7 +126,7 @@ export default function(props) {
 
    //I need a posts collection and comment collection
    return (
-      <div style={{width: '80vw', marginLeft: 'auto', marginRight: 'auto'}}>
+      <div className="post">
          <Breadcrumb>
             <Breadcrumb.Section link onClick={() => handleNavigate('/')}>Home</Breadcrumb.Section>
             <Breadcrumb.Divider icon='right chevron' />
@@ -132,53 +134,55 @@ export default function(props) {
             <Breadcrumb.Divider icon='right arrow' />
             <Breadcrumb.Section active>Post</Breadcrumb.Section>
          </Breadcrumb>
-         <Container text>
-        
-            <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>
-            <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{}}>
-            </div>
-            
-            <p>Author: {returnUser() && returnUser().displayName}</p>
-            {uid ? 
-            (editEnabled ?
-               <div>
-                  <Form reply >
-                  <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
-                  <div style={{marginLeft: '26vw'}}>
-                  <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
-                  <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
-                  </div>
-                  {/* <button  >Post</button>
-                  <button  >Cancel</button> */}
-                  </Form>
-                  {/* <input type="text" /> */}
-               
+         <div className="post-content-container">
+            <Container text>
+         
+               <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>
+               <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{}}>
                </div>
-            
+
+               <p>Author: {returnUser() && returnUser().displayName}</p>
+               {uid ? 
+               (editEnabled ?
+                  <div>
+                     <Form reply >
+                     <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+                     <div style={{marginLeft: '26vw'}}>
+                     <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
+                     <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+                     </div>
+                     {/* <button  >Post</button>
+                     <button  >Cancel</button> */}
+                     </Form>
+                     {/* <input type="text" /> */}
+                  
+                  </div>
+               
+                  :
+                  <div style={{marginLeft: '28vw'}}>
+                     <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+                     {/* <button  >Reply</button> */}
+                  </div>
+               )
                :
                <div style={{marginLeft: '28vw'}}>
-                  <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
-                  {/* <button  >Reply</button> */}
+                  <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => loginWithGoogle()}/>
                </div>
-            )
-            :
-            <div style={{marginLeft: '28vw'}}>
-               <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => loginWithGoogle()}/>
-            </div>
-            }
+               }
 
 
-            {/* comments go here, needs to be mapped once data is working */}
-            <Comment.Group threaded>
-               <Header as='h3' dividing style={{ width: '40vw'}}>
-               Comments
-               </Header>
-            <div style={{marginLeft: '1vw'}}>
-               {nestComments()}
-            </div>
-            </Comment.Group>
+               {/* comments go here, needs to be mapped once data is working */}
+               <Comment.Group threaded>
+                  <Header as='h3' dividing style={{ width: '40vw'}}>
+                  Comments
+                  </Header>
+               <div style={{marginLeft: '1vw'}}>
+                  {nestComments()}
+               </div>
+               </Comment.Group>
 
-         </Container>
+            </Container>
+         </div>
       </div>
    )
 }
