@@ -9,7 +9,18 @@ export default function NewsCard() {
   let whirligig
   const next = () => whirligig.next()
   const prev = () => whirligig.prev()
+  const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
+  
+  useEffect(() => {
+    window.addEventListener('resize', () => handleResize());
+    return  () => {
+        window.removeEventListener('resize', () => handleResize());
+    }
+  }, [])
 
+  function handleResize() {
+    setMobileScreen(window.innerWidth <= 576)
+  }
 
 
   useEffect(() => {
@@ -52,7 +63,7 @@ export default function NewsCard() {
     <Icon style={{alignSelf: 'center'}} color='black' link onClick={prev} name={'arrow alternate circle left outline'} size='huge'/>
     
     <Whirligig
-      visibleSlides={5}
+      visibleSlides={!mobileScreen ? 5 : 2}
     //   gutter="1em"
       ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
       style={{width: '94%'}}
