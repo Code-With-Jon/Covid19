@@ -1,10 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import NewsCardItem from '../NewsCard/NewsCard';
-
+import Whirligig from 'react-whirligig'
+import {Icon} from 'semantic-ui-react'
 
 export default function NewsCard() {
   const [newsArticles, setNewsArticles] = useState([])
   const refresh = (60000 * 30)
+  let whirligig
+  const next = () => whirligig.next()
+  const prev = () => whirligig.prev()
+
+
+
   useEffect(() => {
   
     getNews()
@@ -41,13 +48,23 @@ export default function NewsCard() {
 
 
   return (
-      <div style={{display: 'flex', overflow: 'scroll', width: '100%', height: '100%'}}>
+    <div style={{display: 'flex', flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto', width: '97%'}}>
+    <Icon style={{alignSelf: 'center'}} color='black' link onClick={prev} name={'arrow alternate circle left outline'} size='huge'/>
+    
+    <Whirligig
+      visibleSlides={5}
+    //   gutter="1em"
+      ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
+      style={{width: '94%'}}
+    >
     {newsArticles && newsArticles.map((newsArticle, index) => {
         return(
           <NewsCardItem key={index} newsArticle={newsArticle} />
         )
         }
     )}
+      </Whirligig>
+      <Icon style={{alignSelf: 'center'}} color='black' link onClick={next} name={'arrow alternate circle right outline'} size='huge'/>
     </div>
 
   )
