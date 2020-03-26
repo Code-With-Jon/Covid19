@@ -20,6 +20,18 @@ export default function(props) {
    const uid = useSelector(state => state.firebase.auth.uid);
    const dispatch = useDispatch();
    const history = useHistory();
+   const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
+
+   useEffect(() => {
+     window.addEventListener('resize', () => handleResize());
+     return  () => {
+         window.removeEventListener('resize', () => handleResize());
+     }
+   }, [])
+ 
+   function handleResize() {
+     setMobileScreen(window.innerWidth <= 576)
+   }
 
    function loginWithGoogle() {
       dispatch(signInGmail());
@@ -41,7 +53,11 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <Item key={index}>
+                  {!mobileScreen ?
                   <Item.Image style={{height: '100px', width: '100px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
+                     :
+                     <img style={{height: '50px', width: '50px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
+                  }
                   <Item.Content>
                      <Item.Header as='div'>{doc.title}</Item.Header>
                      <p>Author: {users[doc.postOwner] ? users[doc.postOwner].displayName : ''}</p>

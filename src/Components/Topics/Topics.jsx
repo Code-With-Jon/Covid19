@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import './Topics.css';
 import {Link} from 'react-router-dom';
@@ -27,6 +27,17 @@ export default function Topics(props) {
 
    const counter = useSelector(state => state.post.counter);
    const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
+
+  useEffect(() => {
+    window.addEventListener('resize', () => handleResize());
+    return  () => {
+        window.removeEventListener('resize', () => handleResize());
+    }
+  }, [])
+
+  function handleResize() {
+    setMobileScreen(window.innerWidth <= 576)
+  }
    return (
       <div>
          <h1 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '2vh', color: 'white', background: 'rgba(0,0,0,.87)', width: !mobileScreen ? '20vw' : '52vw'}}>Discussion Board</h1>
