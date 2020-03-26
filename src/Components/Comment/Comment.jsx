@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {signInGmail} from '../../redux/actions/authActions';
 import {addComment} from '../../redux/actions/postActions';
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Button, Comment, Form, Header } from 'semantic-ui-react';
+import './Comment.css';
 
 export default function Comments(props) {
 
@@ -53,7 +54,9 @@ export default function Comments(props) {
             <Comment.Metadata>
                <div>Today at 5:42PM</div>
             </Comment.Metadata>
-            <Comment.Text>{props.comment.content}</Comment.Text>
+            <Comment.Text>
+               <div className="comment-text-content">{props.comment.content}</div>
+            </Comment.Text>
             <Comment.Actions>
                {uid ? 
                ((editEnabled) ?
