@@ -22,6 +22,7 @@ export default function Landing() {
   function handleResize() {
     setMobileScreen(window.innerWidth <= 576)
   }
+  
     useEffect( () => {
         dispatch(fetchCounter());
     }, [])
