@@ -46,6 +46,24 @@ const reducer = (state = initialState, action) => {
             addPostError: true,
             addPostErrorMessage: action.payload,
          };
+      case "POSTUPDATE_REQUEST":
+         return {
+            ...state,
+            isAddingPost: true,
+            addPostError: false
+         };
+      case "POSTUPDATE_SUCCESS":
+         return {
+            ...state,
+            isAddingPost: false,
+         };
+      case "POSTUPDATE_FAILURE":
+         return {
+            ...state,
+            isAddingPost: false,
+            addPostError: true,
+            addPostErrorMessage: action.payload,
+         };
       case "FETCH_TOPIC_POSTS":
          return {
             ...state,

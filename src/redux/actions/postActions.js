@@ -47,7 +47,7 @@ export const addPost = (data) => {
             //add Profile to users state so refetch is not needed.
             const usersObject = {};
             usersObject.allPosts = {...getState().user.allPosts};
-            usersObject.allPosts[data.postId] = {
+            usersObject.allPosts[docRef.id] = {
                avatarUrl: profile.avatarUrl,
                displayName: profile.displayName,
                email: profile.email,
@@ -234,8 +234,9 @@ export const fetchPost = (id) => {
                      }
                   }
                })
+               return doc.data();
             }
-            return doc;
+            return null;
          }).catch((err) => {
             return err;
             //NOTE: err has a err.message property that contains the string of the error, we can use it if we want.
@@ -296,5 +297,65 @@ export const fetchCounter = () => {
             console.log(err);
             //NOTE: err has a err.message property that contains the string of the error, we can use it if we want.
          })
+   }
+}
+
+
+
+
+
+
+export const updatePost = (data) => {
+   return async (dispatch, getState, { getFirebase, getFirestore }) => {
+      dispatch({type: "POSTUPDATE_REQUEST"})
+      const firestore = getFirestore();
+      const profile = getState().firebase.profile;
+
+      const uploadData = {
+         title: data.title,
+         contentJSON: data.contentJSON,
+      }
+
+
+
+      return firestore.collection('posts').doc(data.docId).set({
+         ...uploadData,
+      }, {merge: true}).then(docRef => {
+
+         //add Profile to users state so refetch is not needed.
+         const usersObject = {};
+         usersObject.allPosts = {...getState().user.allPosts};
+         usersObject.allPosts[data.docId] = {
+            avatarUrl: profile.avatarUrl,
+            displayName: profile.displayName,
+            email: profile.email,
+         } 
+         dispatch({
+            type: "FETCH_USERS", payload: usersObject
+         })
+
+
+         //add Post to post state so refetch is not needed.
+         const postDocs = getState().post.docs;
+         postDocs[data.docId].title = data.title;
+         postDocs[data.docId].contentJSON = data.contentJSON;
+
+         dispatch({
+            type: "FETCH_POST", payload: {
+               ...postDocs,
+            }
+         })
+
+
+
+         dispatch({type: "POSTUPDATE_SUCCESS"})
+         return docRef.id
+      }).catch(err => {
+         dispatch({type: "POSTUPDATE_FAILURE", payload: err.message})
+         console.log(err);
+      })
+
+      
+
    }
 }

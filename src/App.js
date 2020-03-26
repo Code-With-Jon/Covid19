@@ -41,6 +41,7 @@ function App() {
             <Route path="/forum/:topic" exact component={SubForum}/>
             <Route path="/forum/:topic/create" exact component={CreatePost}/>
             <Route path="/forum/:topic/:post" exact component={Post}/>
+            <Route path="/forum/:topic/:post/edit" exact component={CreatePost}/>
             <Route path="/learn" exact component={Learn}/>
           </Switch>
           <Footer />

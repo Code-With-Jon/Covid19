@@ -138,6 +138,9 @@ export default function(props) {
                   <div>Author: {returnUser() && returnUser().displayName}</div>
                   <div>{postDocs[postId] && convertTimeToString(postDocs[postId].createdAt.seconds * 1000)}</div>
                </div>
+               {(postDocs[postId] && postDocs[postId].postOwner === uid) &&
+                  <Link to={`${props.match.url}/edit`} className='post-content-edit-button'>Edit</Link>
+               }
                {uid ? 
                (editEnabled ?
                   <Form reply onSubmit={saveComment} >

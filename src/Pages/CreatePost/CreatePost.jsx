@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {addPost} from '../../redux/actions/postActions';
+import {addPost, fetchPost, updatePost} from '../../redux/actions/postActions';
 import {signInGmail} from '../../redux/actions/authActions';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
@@ -11,15 +11,40 @@ import './CreatePost.css';
 export default function CreatePost(props) {
    const dispatch = useDispatch();
 
+   const postId = props.match.params.post ? props.match.params.post : null;
+
    const [editorState, setEditorState] = useState(EditorState.createEmpty());
    const [title, setTitle] = useState('');
    const [editing, setEditing] = useState(true);
-   const [textEmpty, setTextEmpty] = useState(false);
+   const [docExists, setDocExists] = useState(false);
+   const [emptyError, setEmptyError] = useState(false);
    // const [pictures, setPictures] = useState([]);
    const uid = useSelector(state => state.firebase.auth.uid);
 
    //testing states
    const [uploadedImages, setUploadedImages] = useState([])
+
+
+   useEffect( () => {
+      let doc = {};
+
+      async function asyncFetchPost() {
+         doc = await dispatch(fetchPost(postId));
+         if (doc && (uid === doc.postOwner)) {
+            let contentState = convertFromRaw(doc.contentJSON);
+            setEditorState(EditorState.createWithContent(contentState));
+            setTitle(doc.title);
+            setDocExists(true);
+         } else {
+            props.history.push(`/forum/${props.match.params.topic}`)
+         }
+      }
+
+      if (postId) {
+         asyncFetchPost();
+      }
+
+   }, [])
 
    function loginWithGoogle() {
       dispatch(signInGmail());
@@ -33,7 +58,7 @@ export default function CreatePost(props) {
       // console.log(title);
       const contentState = editorState.getCurrentContent();
       if (!contentState.hasText()) {
-         setTextEmpty(true);
+         setEmptyError(true);
          return;
       }
       setEditing(false);
@@ -44,18 +69,34 @@ export default function CreatePost(props) {
          contentJSON: convertToRaw(contentState),
          title: title,
       }
-      try {
-         docId = await dispatch(addPost(data))
-         props.history.push(`/forum/${props.match.params.topic}/${docId}`)
+
+      if (docExists) {
+         docId = postId;
+         try {
+            await dispatch(updatePost({
+               ...data,
+               docId: docId,
+            }));
+            props.history.push(`/forum/${props.match.params.topic}/${docId}`)
+         }
+         catch(err) {
+            console.log(err);
+         }
+      } else {
+         try {
+            docId = await dispatch(addPost(data))
+            props.history.push(`/forum/${props.match.params.topic}/${docId}`)
+         }
+         catch(err) {
+            console.log(err)
+         }
       }
-      catch(err) {
-         console.log(err)
-      }
+
    }
    
    function handleEditorStateChange(EditorStateObject) {
-      if (textEmpty) {
-         setTextEmpty(false);
+      if (emptyError) {
+         setEmptyError(false);
       }
       setEditorState(EditorStateObject);
    }
@@ -106,7 +147,7 @@ export default function CreatePost(props) {
             editorState={editorState}
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
-            editorClassName={`editorClassName ${textEmpty && 'editorError'}`}
+            editorClassName={`editorClassName ${emptyError && 'editorError'}`}
             onEditorStateChange={handleEditorStateChange}
             spellCheck={true}
             toolbar={{
