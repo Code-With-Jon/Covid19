@@ -27,7 +27,7 @@ return(
         </div>  */}
 
     <h2 style={{marginLeft: '2vw', paddingLeft: '6vw', marginTop: '0vh', color: 'white', background: 'rgba(0,0,0,.87)', width: !mobileScreen ? '20vw' : '40vw'}}>Latest News</h2>
-     <div id='news-articles' style={{display: 'flex', overflow: 'scroll', height: '100%'}}>
+     {/* <div id='news-articles' style={{display: 'flex', overflow: 'scroll', height: '100%'}}> */}
 
    <NewsCard />
 
@@ -39,7 +39,7 @@ return(
 
 
 
-</div>
+{/* </div> */}
 
    <Topics />
 

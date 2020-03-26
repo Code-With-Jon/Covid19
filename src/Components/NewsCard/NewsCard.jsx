@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    maxWidth: '30vw',
   },
   media: {
     height: 0,
@@ -44,8 +44,8 @@ export default function NewsCard(props) {
 
 
   return (
-     <div style={{display: 'flex', flexDirection: 'row'}}>
-    <Card className={classes.root} style={{width: '18vw', height: '100%'}}>
+    //  <div style={{display: 'flex', flexDirection: 'row'}}>
+    <Card className={classes.root} style={{ height: '100%'}}>
       <p style={{color: 'rgba(0, 0, 0, 0.54)'}}>{props.newsArticle.publishedAt}</p>
       <CardHeader
         // avatar={
@@ -97,7 +97,7 @@ export default function NewsCard(props) {
         </CardContent>
       </Collapse>
     </Card>
-    </div>
+    // </div>
 
 
   )
