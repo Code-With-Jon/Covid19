@@ -116,7 +116,7 @@ export default function Topics(props) {
  
 </Grid>
 
-<Divider vertical></Divider>
+<Divider vertical className="vertical-topic-bar"></Divider>
 </Message>
 </Segment>
 

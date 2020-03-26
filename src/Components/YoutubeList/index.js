@@ -49,7 +49,9 @@ export default class YoutubeList extends React.Component {
       return (
         <div className="youtube">
           <h3 style={{marginLeft: '30vw'}}>Youtube Search:</h3>
+          <div style={{display: 'flex', justifyContent: 'center'}}>
           <SearchBar onSearchTermChange={videoSearch} />
+          </div>
           <div className="youtube-videoBox">
             <VideoDetail video={this.state.selectedVideo} />
             <VideoList
