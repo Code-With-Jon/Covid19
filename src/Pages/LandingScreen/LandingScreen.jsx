@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import {fetchCounter} from '../../redux/actions/postActions';
 import ScrollText from '../../Components/LandingScreen/ScrollText'
 import NewsCard from '../../Components/LandingScreen/NewsCard';
-
+import {Helmet} from 'react-helmet'
 
 export default function Landing() {
     const dispatch = useDispatch();
@@ -22,12 +22,16 @@ export default function Landing() {
   function handleResize() {
     setMobileScreen(window.innerWidth <= 576)
   }
-  
+
     useEffect( () => {
         dispatch(fetchCounter());
     }, [])
 return(
  <div>
+      <Helmet>
+    <title>Talk Covid 19</title>
+    <meta name="description" content="Stay up to date with covid 19 and join in on conversations about covid 19 on our Covid 19 discussion board" />
+  </Helmet>
      <ScrollText />
      {/* <div style={{display: 'flex', flexDirection: 'row'}}>
 <div style={{display: 'flex', flexDirection: 'column', width: '70vw'}}>

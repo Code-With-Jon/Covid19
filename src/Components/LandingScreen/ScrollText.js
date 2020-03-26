@@ -9,7 +9,7 @@ return(
     <Ticker >
         {({ index }) => (
             <div style={{display: 'flex', flexDirection: 'row'}}>
-              <img src="https://www.trackcorona.live/static/corona/images/svg/doctor.svg" alt="" height='50px' />
+              {/* <img src="https://www.trackcorona.live/static/corona/images/svg/doctor.svg" alt="" height='50px' /> */}
               {/* <div> */}
 
             <h1 style={{marginRight: '10vw'}}>{quotes[index % quotes.length]}</h1>

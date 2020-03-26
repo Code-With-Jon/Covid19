@@ -2,10 +2,15 @@ import React from 'react'
 import IframeComponent from '../../Components/Map';
 import './Learn.css';
 // import "node_modules/video-react/dist/video-react.css";
+import {Helmet} from 'react-helmet'
 
 export default function Learn(props) {
 return(
 <div id="learn" style={{backgroundColor: 'black', height: '70%'}}>
+<Helmet>
+    <title>Learn About Covid 19</title>
+    <meta name="description" content="Read and watch information about Covid 19 and how to stay safe" />
+  </Helmet>
     <div className="learn-header-container">
         <div className="learn-header-text-container">
             <h1 style={{color: 'white', fontSize: 62}}>Learn About Covid 19</h1>
