@@ -5,7 +5,8 @@ import {signInGmail} from '../../redux/actions/authActions';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react';
+import './CreatePost.css';
 
 export default function CreatePost(props) {
    const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function CreatePost(props) {
    const [editorState, setEditorState] = useState(EditorState.createEmpty());
    const [title, setTitle] = useState('');
    const [editing, setEditing] = useState(true);
+   const [textEmpty, setTextEmpty] = useState(false);
    // const [pictures, setPictures] = useState([]);
    const uid = useSelector(state => state.firebase.auth.uid);
 
@@ -23,16 +25,23 @@ export default function CreatePost(props) {
       dispatch(signInGmail());
     }
 
-   async function createPost() {
+   async function createPost(e) {
+      e.preventDefault();
       if (!editing) {
          return;
       }
+      // console.log(title);
+      const contentState = editorState.getCurrentContent();
+      if (!contentState.hasText()) {
+         setTextEmpty(true);
+         return;
+      }
       setEditing(false);
-      console.log(title);
+
       var docId = '';
       const data = {
          topic: props.match.params.topic,
-         contentJSON: convertToRaw(editorState.getCurrentContent()),
+         contentJSON: convertToRaw(contentState),
          title: title,
       }
       try {
@@ -45,6 +54,9 @@ export default function CreatePost(props) {
    }
    
    function handleEditorStateChange(EditorStateObject) {
+      if (textEmpty) {
+         setTextEmpty(false);
+      }
       setEditorState(EditorStateObject);
    }
 
@@ -81,12 +93,12 @@ export default function CreatePost(props) {
          <h1>
             Create Topic
          </h1>
-         <Form unstackable>
-    <Form.Group widths={2}>
-      <Form.Input label='Topic Title' placeholder='Topic Title' name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-    </Form.Group>
+         <Form unstackable id="title" onSubmit={createPost} className="createPost-title-container">
+            <Form.Group widths='equal'>
+               <Form.Input required label='Topic Title' placeholder='Topic Title' name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            </Form.Group>
     
-    </Form>
+         </Form>
          {/* <button >Save</button>
          <input type="text" /> */}
          <Editor
@@ -94,8 +106,9 @@ export default function CreatePost(props) {
             editorState={editorState}
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
+            editorClassName={`editorClassName ${textEmpty && 'editorError'}`}
             onEditorStateChange={handleEditorStateChange}
+            spellCheck={true}
             toolbar={{
                image: {
                   
@@ -116,12 +129,13 @@ export default function CreatePost(props) {
                 },
             }}
          />
-
-         {uid ? 
-            <Button type='submit' style={{float: 'right'}} positive onClick={() => createPost()}>Save</Button>
-            :
-            <Button type='submit' style={{float: 'right'}} positive onClick={() => loginWithGoogle()}>Log In</Button>
-         }
+         <div className="createPost-save-button">
+            {uid ? 
+               <Button type='submit' form="title" positive className="createPost-save-button">Save</Button>
+               :
+               <Button positive className="createPost-save-button" onClick={() => loginWithGoogle()}>Log In</Button>
+            }
+         </div>
 
       </div>
    )
