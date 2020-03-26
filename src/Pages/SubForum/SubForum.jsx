@@ -9,6 +9,7 @@ import { Button, Icon, Image, Item, Label, Breadcrumb } from 'semantic-ui-react'
 import topicRoutes from '../../utils/topicsRoutes';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
 // import Breadcrumb from '../../Components/Breadcrumb/Breadcrumb';
+import {Helmet} from 'react-helmet'
 
 export default function(props) {
 
@@ -53,6 +54,10 @@ export default function(props) {
          return postDocs[topic].docsArray.map( (doc, index) => {
             return (
                <Item key={index}>
+                  <Helmet>
+                     <title>Post a topic in Talk Covid 19</title>
+                     <meta name="description" content="Share your stories or ideas by posting a new topic on Talk Covid 19 discussion board" />
+                  </Helmet>
                   {!mobileScreen ?
                   <Item.Image style={{height: '100px', width: '100px'}} src={users[doc.postOwner] ? users[doc.postOwner].avatarUrl : null} />
                      :
