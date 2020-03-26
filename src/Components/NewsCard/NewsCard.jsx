@@ -46,22 +46,26 @@ export default function NewsCard(props) {
   return (
      <div style={{display: 'flex', flexDirection: 'row'}}>
     <Card className={classes.root} style={{width: '18vw', height: '100%'}}>
+      <p>{props.newsArticle.publishedAt}</p>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={props.newsArticle.title}
-      //   subheader={props.newsArticle.publishedAt}
-        subheader={props.newsArticle.author}
+        // avatar={
+        //   // <Avatar aria-label="recipe" className={classes.avatar}>
+        //   //   R
+        //   // </Avatar>
+        // }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
+        subheader={`${props.newsArticle.title}`}
+     
+      >
+<p>{props.newsArticle.author}</p> 
+<br></br>
 
-      />
+      </CardHeader>
+    
       <CardMedia
         className={classes.media}
         image={props.newsArticle.urlToImage}

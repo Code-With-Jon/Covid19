@@ -33,12 +33,12 @@ export default function Topics(props) {
          <div style={{display: 'flex', flexDirection: 'row'}}>
          
             <div style={{flexDirection: 'column', flexWrap: 'no-wrap', width: '10vw'}}>
-            <Advertisement unit='wide skyscraper' test='Wide Skyscraper' style={{marginLeft: '5vw'}}>
+            {/* <Advertisement unit='wide skyscraper' test='Wide Skyscraper' style={{marginLeft: '5vw'}}>
          <AdSense.Google
   client='ca-pub-7292810486004926'
   slot='7806394673'
 />
-         </Advertisement>
+         </Advertisement> */}
          </div>
          <div style={{flexDirection: 'column', flexWrap: 'no-wrap', width: '88vw'}}>
          {topicsRoutes.map((topic, index) => {
@@ -68,11 +68,12 @@ export default function Topics(props) {
 <Grid columns={2} relaxed='very' stackable style={{alignItems: 'center'}}>
   <Grid.Column>
  
-  <Link key={index} to={topic.route} style={{}}>
+ 
     <Header as='h1'>{topic.name}</Header>
     <p>
     {topic.description}
     </p>
+    <Link key={index} to={topic.route} style={{}}>
     <Button color='blue'>DISCUSS &raquo;</Button>
     </Link>
 
