@@ -14,6 +14,7 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import {convertTimeToString} from '../../utils/helperFunctions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +58,7 @@ export default function NewsCard(props) {
   return (
     //  <div style={{display: 'flex', flexDirection: 'row'}}>
     <Card className={classes.root} style={{ height: '100%'}}>
-      <p style={{color: 'rgba(0, 0, 0, 0.54)'}}>{props.newsArticle.publishedAt}</p>
+      <p style={{color: 'rgba(0, 0, 0, 0.54)'}}>{convertTimeToString(props.newsArticle.publishedAt)}</p>
       <CardHeader
         // avatar={
         //   // <Avatar aria-label="recipe" className={classes.avatar}>
