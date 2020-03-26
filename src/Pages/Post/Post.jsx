@@ -32,16 +32,6 @@ export default function(props) {
    
 
    useEffect( () => {
-      //If immediately created and redirected, fetchpost likely won't return anything because firebase still needs time to save, maybe add a set timeout or delay?
-      // async function asyncFetchPost() {
-      //    const res = await dispatch(fetchPost(postId));
-      //    if (!res.id) {
-      //       setTimeout( () => {
-      //          dispatch(fetchPost(postId))
-      //       }, 1000);
-      //    }
-      // }
-      // asyncFetchPost();
       dispatch(fetchPost(postId))
       dispatch(fetchComments(postId));
       dispatch(fetchUsers({field: 'activePosts', value: postId}))
@@ -57,10 +47,15 @@ export default function(props) {
       scrollToTopSmooth();
    }
 
+   function handleTextAreaInput(e) {
+      setCommentContent(e.target.value);
+      // console.log(commentContent);
+   }
 
    function getHtmlString() {
       return postDocs[postId] ? draftToHtml(postDocs[postId].contentJSON) : ''
    }
+
 
    function nestComments() {
 
@@ -113,6 +108,7 @@ export default function(props) {
          parentId: null,
          content: commentContent,
       }
+      // console.log(commentContent);
       dispatch(addComment(data));
       setEditEnabled(!editEnabled)
    }
@@ -138,35 +134,29 @@ export default function(props) {
             <Container text>
          
                <Header as='h2'>{postDocs[postId] && postDocs[postId].title}</Header>
-               <div dangerouslySetInnerHTML={{__html: getHtmlString()}} style={{}}>
+               <div className="post-content-text" dangerouslySetInnerHTML={{__html: getHtmlString()}}>
                </div>
 
                <p>Author: {returnUser() && returnUser().displayName}</p>
                {uid ? 
                (editEnabled ?
-                  <div>
-                     <Form reply >
-                     <Form.TextArea style={{width: '80%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
-                     <div style={{marginLeft: '26vw'}}>
-                     <Button content='Post' labelPosition='left' icon='edit' primary onClick={() => saveComment()}/>
-                     <Button content='Cancel' labelPosition='right' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+                  <Form reply >
+                     <Form.TextArea style={{width: '100%'}} name="comment" value={commentContent} onChange={handleTextAreaInput} />
+                     <div className="post-content-button-container1">
+                        <Button content='Post' labelPosition='left' icon='check circle outline' primary onClick={() => saveComment()}/>
+                        <Button content='Cancel' labelPosition='left' icon='times circle outline' primary onClick={() => setEditEnabled(!editEnabled)}/>
                      </div>
-                     {/* <button  >Post</button>
-                     <button  >Cancel</button> */}
-                     </Form>
-                     {/* <input type="text" /> */}
-                  
-                  </div>
+                  </Form>  
                
                   :
-                  <div style={{marginLeft: '28vw'}}>
-                     <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
+                  <div className="post-content-button-container1">
+                     <Button content='Comment' labelPosition='left' icon='edit' primary onClick={() => setEditEnabled(!editEnabled)}/>
                      {/* <button  >Reply</button> */}
                   </div>
                )
                :
-               <div style={{marginLeft: '28vw'}}>
-                  <Button content='Add Reply' labelPosition='left' icon='edit' primary onClick={() => loginWithGoogle()}/>
+               <div className="post-content-button-container1">
+                  <Button content='Comment' labelPosition='left' icon='edit' primary onClick={() => loginWithGoogle()}/>
                </div>
                }
 
@@ -176,7 +166,7 @@ export default function(props) {
                   <Header as='h3' dividing style={{ width: '40vw'}}>
                   Comments
                   </Header>
-               <div style={{marginLeft: '1vw'}}>
+               <div className="post-comment-container">
                   {nestComments()}
                </div>
                </Comment.Group>
