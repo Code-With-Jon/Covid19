@@ -16,6 +16,7 @@
     "rc-footer": "^0.6.2",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
+    "react-burger-menu": "^2.6.13",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.4",
     "react-iframe": "^1.8.0",

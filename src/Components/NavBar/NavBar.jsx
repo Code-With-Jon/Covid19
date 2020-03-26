@@ -8,6 +8,8 @@ import {Link, useHistory} from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
 import './NavBar.css'
+import SideBar from "./sidebar/sidebar";
+
 export default function NavBar(props) {
 
    const dispatch = useDispatch();
@@ -42,7 +44,7 @@ export default function NavBar(props) {
             </div>
             </Link>
             <div style={{width: '77vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            <nav>
+         <nav className='nav'>
           <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
             <li>
               <Link to="/" onClick={() => scrollToTopSmooth()}>HOME</Link>
@@ -55,6 +57,7 @@ export default function NavBar(props) {
             </li>
           </ul>
         </nav>
+        <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
                     
                         <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
                         {!avatar ? 
