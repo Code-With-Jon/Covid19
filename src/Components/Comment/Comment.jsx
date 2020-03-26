@@ -61,7 +61,10 @@ export default function Comments(props) {
                {uid ? 
                ((editEnabled) ?
                   <> 
-                     <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/>
+                     <Form reply >
+                        <textarea rows={3} style={{width: '100%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
+                     </Form>  
+                     {/* <input type="text" name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)}/> */}
                      <Comment.Action onClick={() => saveComment()}>Post</Comment.Action>
                      <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Cancel</Comment.Action>
                   </>

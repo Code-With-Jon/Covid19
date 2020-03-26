@@ -47,10 +47,6 @@ export default function(props) {
       scrollToTopSmooth();
    }
 
-   function handleTextAreaInput(e) {
-      setCommentContent(e.target.value);
-      // console.log(commentContent);
-   }
 
    function getHtmlString() {
       return postDocs[postId] ? draftToHtml(postDocs[postId].contentJSON) : ''
@@ -141,7 +137,7 @@ export default function(props) {
                {uid ? 
                (editEnabled ?
                   <Form reply >
-                     <Form.TextArea style={{width: '100%'}} name="comment" value={commentContent} onChange={handleTextAreaInput} />
+                     <Form.TextArea style={{width: '100%'}} name="comment" value={commentContent} onChange={(e) => setCommentContent(e.target.value)} />
                      <div className="post-content-button-container1">
                         <Button content='Post' labelPosition='left' icon='check circle outline' primary onClick={() => saveComment()}/>
                         <Button content='Cancel' labelPosition='left' icon='times circle outline' primary onClick={() => setEditEnabled(!editEnabled)}/>
