@@ -33,12 +33,12 @@ export default function Topics(props) {
          <div style={{display: 'flex', flexDirection: 'row'}}>
          
             <div style={{flexDirection: 'column', flexWrap: 'no-wrap', width: '10vw'}}>
-            <Advertisement unit='wide skyscraper' test='Wide Skyscraper' style={{marginLeft: '5vw'}}>
+            {/* <Advertisement unit='wide skyscraper' test='Wide Skyscraper' style={{marginLeft: '5vw'}}>
          <AdSense.Google
   client='ca-pub-7292810486004926'
   slot='7806394673'
 />
-         </Advertisement>
+         </Advertisement> */}
          </div>
          <div style={{flexDirection: 'column', flexWrap: 'no-wrap', width: '88vw'}}>
          {topicsRoutes.map((topic, index) => {
