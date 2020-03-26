@@ -68,11 +68,12 @@ export default function Topics(props) {
 <Grid columns={2} relaxed='very' stackable style={{alignItems: 'center'}}>
   <Grid.Column>
  
-  <Link key={index} to={topic.route} style={{}}>
+ 
     <Header as='h1'>{topic.name}</Header>
     <p>
     {topic.description}
     </p>
+    <Link key={index} to={topic.route} style={{}}>
     <Button color='blue'>DISCUSS &raquo;</Button>
     </Link>
 
