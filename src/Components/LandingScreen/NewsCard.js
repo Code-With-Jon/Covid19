@@ -48,7 +48,7 @@ export default function NewsCard() {
 
 
   return (
-    <div style={{display: 'flex', flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto'}}>
+    <div style={{display: 'flex', flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto', width: '97%'}}>
     <Icon style={{alignSelf: 'center'}} color='black' link onClick={prev} name={'arrow alternate circle left outline'} size='huge'/>
     
     <Whirligig
