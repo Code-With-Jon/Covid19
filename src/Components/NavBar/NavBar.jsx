@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react'
 import {Link, useHistory} from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
-
+import './NavBar.css'
 export default function NavBar(props) {
 
    const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function NavBar(props) {
 
    return (
       <div>
-         <div style={{display: 'flex', flexDirection: 'row', background: 'rgba(0,0,0,.87)', }}>
+         <div className='menu'>
             <Link to='/'>
             <div style={{display: 'flex', flexDirection: 'row', marginLeft: '5vw'}}>
                <img src="https://cdn.pixabay.com/photo/2017/09/11/03/18/virus-icon-2737712_960_720.png" height="50px" alt="Logo" style={{alignSelf: "center"}}/>

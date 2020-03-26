@@ -1,0 +1,12 @@
+.menu {
+    display: 'flex';
+    flex-direction: 'row';
+    background: 'rgba(0,0,0,.87)';
+}
+
+
+@media (max-width: 560px) {
+    .menu {
+        display: 'none';
+    }
+}
