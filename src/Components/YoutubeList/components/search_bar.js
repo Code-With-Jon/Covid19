@@ -23,7 +23,7 @@ export default function SearchBar(props) {
   }
 
     return (
-      <div style={{width: !mobileScreen ? '40%' : '60%'}}>
+      <div style={{width: !mobileScreen ? '40%' : '80%'}}>
         {!mobileScreen ?
       <div className="search-bar" style={{marginTop: "20px",marginTop: "20px",textAlign: "center"}}>
         <Input icon='search' focus placeholder='Search...' value={term}
