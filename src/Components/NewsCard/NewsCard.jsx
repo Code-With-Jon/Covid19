@@ -46,7 +46,7 @@ export default function NewsCard(props) {
   return (
      <div style={{display: 'flex', flexDirection: 'row'}}>
     <Card className={classes.root} style={{width: '18vw', height: '100%'}}>
-      <p>{props.newsArticle.publishedAt}</p>
+      <p style={{color: 'rgba(0, 0, 0, 0.54)'}}>{props.newsArticle.publishedAt}</p>
       <CardHeader
         // avatar={
         //   // <Avatar aria-label="recipe" className={classes.avatar}>

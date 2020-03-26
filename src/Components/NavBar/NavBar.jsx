@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {signInGmail, signOut} from '../../redux/actions/authActions';
 import Logo from '../../TalkCovidLogo.png'
@@ -8,11 +8,25 @@ import {Link, useHistory} from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import {scrollToTopSmooth} from '../../utils/helperFunctions';
 import './NavBar.css'
+import SideBar from "./sidebar/sidebar";
+
 export default function NavBar(props) {
 
    const dispatch = useDispatch();
-   const avatar = useSelector(state => state.firebase.profile.avatarUrl)
-   const history = useHistory();
+   const avatar = useSelector(state => state.firebase.profile.avatarUrl);
+   const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
+
+  useEffect(() => {
+    window.addEventListener('resize', () => handleResize());
+    return  () => {
+        window.removeEventListener('resize', () => handleResize());
+    }
+  }, [])
+
+  function handleResize() {
+    setMobileScreen(window.innerWidth <= 576)
+  }
+
 
    function loginWithGoogle() {
       dispatch(signInGmail())
@@ -42,7 +56,7 @@ export default function NavBar(props) {
             </div>
             </Link>
             <div style={{width: '77vw', textAlign: 'end', flexDirection: 'row', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            <nav>
+         <nav className='nav'>
           <ul style={{display: 'flex', flexDirection: 'row', listStyleType: 'none', color: 'white', paddingRight: '5vw'}}>
             <li>
               <Link to="/" onClick={() => scrollToTopSmooth()}>HOME</Link>
@@ -55,6 +69,10 @@ export default function NavBar(props) {
             </li>
           </ul>
         </nav>
+        {mobileScreen && 
+          <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+        
+        }
                     
                         <img src={avatar ? avatar && avatar : DefaultAvatar} alt="avatar" height="80px" style={{borderRadius: 40}}/>
                         {!avatar ? 
