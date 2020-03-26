@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '30vw',
+    // maxWidth: !mobileScreen && '30vw',
   },
   media: {
     height: 0,
@@ -41,7 +41,18 @@ const useStyles = makeStyles(theme => ({
 export default function NewsCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [mobileScreen, setMobileScreen] = useState(window.innerWidth <= 576)
 
+  useEffect(() => {
+    window.addEventListener('resize', () => handleResize());
+    return  () => {
+        window.removeEventListener('resize', () => handleResize());
+    }
+  }, [])
+
+  function handleResize() {
+    setMobileScreen(window.innerWidth <= 576)
+  }
 
   return (
     //  <div style={{display: 'flex', flexDirection: 'row'}}>
