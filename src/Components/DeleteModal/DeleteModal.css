@@ -1,3 +1,6 @@
-.delete-modal {
-   margin: 0;
+.modal {
+   top: auto;
+   left: auto;
+   right: auto;
+   bottom: auto;
 }

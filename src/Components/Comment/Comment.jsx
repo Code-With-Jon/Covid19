@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {signInGmail} from '../../redux/actions/authActions';
 import {addComment} from '../../redux/actions/postActions';
-import { Button, Comment, Form, Header } from 'semantic-ui-react';
+import {Comment, Form} from 'semantic-ui-react';
 import {convertTimeToString} from '../../utils/helperFunctions';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import './Comment.css';
@@ -51,6 +51,12 @@ export default function Comments(props) {
 
    return (
       <Comment>
+         {props.comment.deleted ? 
+         <Comment.Text>
+            <div className="comment-text-content">Comment has been deleted by user.</div>
+         </Comment.Text>
+         :
+         <>
          <Comment.Avatar src={users[props.comment.commentOwner] ? users[props.comment.commentOwner].avatarUrl : null} />
          <Comment.Content>
             <Comment.Author as='a'>{users[props.comment.commentOwner] && users[props.comment.commentOwner].displayName}</Comment.Author>
@@ -83,6 +89,8 @@ export default function Comments(props) {
 
             </Comment.Actions>
          </Comment.Content>
+         </>
+         }
         
          {nestedComments()}
 
