@@ -5,6 +5,7 @@ import {addComment} from '../../redux/actions/postActions';
 import {Comment, Form} from 'semantic-ui-react';
 import {convertTimeToString} from '../../utils/helperFunctions';
 import DeleteModal from '../DeleteModal/DeleteModal';
+import nullAvatar from '../../avatar-default.jpg';
 import './Comment.css';
 
 export default function Comments(props) {
@@ -52,9 +53,17 @@ export default function Comments(props) {
    return (
       <Comment>
          {props.comment.deleted ? 
-         <Comment.Text>
-            <div className="comment-text-content">Comment has been deleted by user.</div>
-         </Comment.Text>
+         <>
+         <Comment.Avatar src={nullAvatar} />
+         <Comment.Content>
+            <Comment.Metadata>
+               <div>{convertTimeToString(props.comment.createdAt.seconds * 1000)}</div>
+            </Comment.Metadata>
+            <Comment.Text>
+               <div className="comment-text-content-deleted">Comment has been deleted by user.</div>
+            </Comment.Text>
+         </Comment.Content>
+         </>
          :
          <>
          <Comment.Avatar src={users[props.comment.commentOwner] ? users[props.comment.commentOwner].avatarUrl : null} />
@@ -80,7 +89,9 @@ export default function Comments(props) {
                   :
                   <>
                      <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
-                     <DeleteModal commentId={props.comment.id} postId={props.comment.postId}/>
+                     {(uid === props.comment.commentOwner) && 
+                        <DeleteModal commentId={props.comment.id} postId={props.comment.postId}/>
+                     }
                   </>
                )
                :

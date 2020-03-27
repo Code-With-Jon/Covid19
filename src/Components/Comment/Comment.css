@@ -2,6 +2,10 @@
    white-space: pre-line;
 }
 
+.comment-text-content-deleted {
+   color: rgba(0,0,0,.4);
+}
+
 .comment-post {
    margin: 0 .75em 0 0;
    border: none;
