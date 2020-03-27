@@ -6,7 +6,7 @@ import './DeleteModal.css';
 
 export default function ModalBasicExample() {
    return(
-      <Modal trigger={<Button>Basic Modal</Button>} basic size='small' className="delete-modal">
+      <Modal trigger={<Button>Basic Modal</Button>} basic size='small' className="delete-modal" style={{marginTop: '13%', marginLeft: '30vw'}}>
          <Header icon='archive' content='Delete Comment' />
          <Modal.Content>
             <p>
