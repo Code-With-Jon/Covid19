@@ -1,3 +1,10 @@
 .delete-modal {
    margin: 0;
 }
+
+.modal {
+   top: auto;
+   right: auto;
+   left: auto;
+   bottom: auto;
+}
