@@ -24,7 +24,7 @@ export const fetchUsers = (params) => {
             }
 
             dispatch({
-               type: "FETCH_USERS", payload: usersObject
+               type: "FETCH_USERS", payload: {...usersObject}
             })
 
          }).catch((err) => {

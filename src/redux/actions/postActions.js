@@ -53,7 +53,7 @@ export const addPost = (data) => {
                email: profile.email,
             } 
             dispatch({
-               type: "FETCH_USERS", payload: usersObject
+               type: "FETCH_USERS", payload: {...usersObject}
             })
 
 
