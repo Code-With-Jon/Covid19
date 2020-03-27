@@ -359,3 +359,9 @@ export const updatePost = (data) => {
 
    }
 }
+
+export const deleteComment = () => {
+   return async (dispatch, getState, { getFirebase, getFirestore }) => {
+
+   }
+}

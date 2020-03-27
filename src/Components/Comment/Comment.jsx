@@ -4,6 +4,7 @@ import {signInGmail} from '../../redux/actions/authActions';
 import {addComment} from '../../redux/actions/postActions';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
 import {convertTimeToString} from '../../utils/helperFunctions';
+import DeleteModal from '../DeleteModal/DeleteModal';
 import './Comment.css';
 
 export default function Comments(props) {
@@ -73,6 +74,7 @@ export default function Comments(props) {
                   :
                   <>
                      <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
+                     <DeleteModal />
                   </>
                )
                :
