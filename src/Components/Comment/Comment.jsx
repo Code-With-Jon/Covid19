@@ -80,7 +80,7 @@ export default function Comments(props) {
                   :
                   <>
                      <Comment.Action onClick={() => setEditEnabled(!editEnabled)}>Reply</Comment.Action>
-                     <DeleteModal />
+                     <DeleteModal commentId={props.comment.id} postId={props.comment.postId}/>
                   </>
                )
                :

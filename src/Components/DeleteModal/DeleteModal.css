@@ -4,3 +4,7 @@
    right: auto;
    bottom: auto;
 }
+
+.comment-post.delete-button {
+   font-size: 1em;
+}

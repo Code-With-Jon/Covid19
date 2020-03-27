@@ -360,8 +360,26 @@ export const updatePost = (data) => {
    }
 }
 
-export const deleteComment = () => {
+export const deleteComment = (data) => {
    return async (dispatch, getState, { getFirebase, getFirestore }) => {
+      const firestore = getFirestore();
+      const commentObject = getState().post.comments;
 
+      firestore.collection('posts').doc(data.postId).collection('comments').doc(data.commentId).set({
+         deleted: true,
+      }, {merge: true}).then(() => {
+
+         //Update local state so person does not have to refresh to see his deleted comment
+
+         commentObject[data.postId].find(element => element.id === data.commentId).deleted = true;
+         
+         dispatch({
+            type: "FETCH_COMMENTS", payload: {
+               ...commentObject
+            },
+         })
+      }).catch(err => {
+         console.log(err);
+      })
    }
 }
